@@ -2604,7 +2604,7 @@
       "e00001": {
         "tpl": "tplIFrame",
         "data": {
-          "src": "REPLACE_WITH_YOUR_HOSTED_URL/uebersicht.html",
+          "src": "http://192.168.178.133:8082/vis-2-beta.0/uebersicht.html",
           "seamless": "true",
           "refreshInterval": "0"
         },

@@ -134,7 +134,7 @@ function endPage(v,y){ navInclude(v); v.settings.sizey = String(y + 8 + 110); }
   const v = view('indexHtml');
   v.settings.sizey = String(812); // fixed to one screen — the iframe scrolls its own content internally
   addW(v,'tplIFrame',0,0,W,812,{
-    src:'REPLACE_WITH_YOUR_HOSTED_URL/uebersicht.html', seamless:'true', refreshInterval:'0'
+    src:'http://192.168.178.133:8082/vis-2-beta.0/uebersicht.html', seamless:'true', refreshInterval:'0'
   },{ border:'none', position:'fixed', top:'0px', left:'0px', width:'100%', height:'100%', 'z-index':1 });
   navInclude(v);
   project['indexHtml'] = v;
