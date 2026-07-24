@@ -2,10 +2,28 @@
 
 Dieses Verzeichnis enthält ein komplettes vis-2-Projekt (`vis-views.json`), das
 den vorhandenen Haus-Dashboard (Übersicht, Heizung, PV, Lüftung, Solar,
-Temperatur, Statistik) modern und übersichtlich neu aufbaut — auf Basis der
+Temperatur, Statistik) **komplett neu und eigenständig** aufbaut — auf Basis der
 **echten Datenpunkt-IDs** aus den vorhandenen Views (`index`, `viewHeizung`,
 `viewTemperatur`, `viewPhotovoltaik`, `view_recovair`, `view_solaranlage`,
 `navigation`) und der bereitgestellten Objekt-Liste.
+
+**Design (v2):** bewusst ohne jede Anlehnung an die klassische vis-Optik —
+kein Amber-Divider, keine alten `/icons-mfd-svg/`-Icons, kein Redmond-Theme-Look.
+Stattdessen: dunkler Verlaufshintergrund, "Glas"-Karten (halbtransparent, weich
+abgerundet, dezenter Schatten/Blur), Farb-Chip-Icons statt Icon-Dateien, System-
+Schriftart (`-apple-system`/SF Pro), 2–3-spaltige Kennzahlen-Kacheln statt
+Listenzeilen, schwebende Pill-Navigation unten. Canvas-Breite **375px**, exakt
+auf die logische Auflösung des iPhone X/10 (375×812pt) abgestimmt; Inhalte
+scrollen vertikal, die Navigation bleibt als eingebettete Leiste am Ende jeder
+Seite (kein Overlay-Fixed, da klassische vis-Views keine echte fixe Position
+über Scroll-Inhalt unterstützen — dafür wäre ein CSS-Widget mit `position:fixed`
+nötig, das hier bewusst vermieden wurde, um die garantiert funktionierende
+`tplContainerView`-Einbindung zu nutzen).
+
+Diese Version läuft **parallel** zu deinem bestehenden Dashboard: euer
+Original bleibt unangetastet im klassischen `vis`-Adapter (Instanz `vis.0`);
+dieses Projekt ist für eine eigene **vis-2**-Instanz gedacht und überschreibt
+nichts von `vis.0`.
 
 ## Enthaltene Views
 
@@ -20,10 +38,9 @@ Temperatur, Statistik) modern und übersichtlich neu aufbaut — auf Basis der
 | `viewTemperatur`     | Räume (Shelly H&T), Innen/Außen, Steuerung, 2 Grafana-Panels |
 | `viewStatistics`     | Strom/Erdgas/Wasser (Heute–Jahr), Top-Verbraucher/Monat |
 
-Alle Views nutzen ein einheitliches dunkles Karten-Layout (abgerundete Karten,
-Akzentfarbe Amber `#f4b043`, Grün=Erzeugung, Rot=Verbrauch, Blau=Einspeisung/
-Feuchte) statt des bisherigen freien Layouts – für bessere Lesbarkeit auf dem
-Handy.
+Alle Views nutzen ein einheitliches "Glas"-Karten-Layout mit Indigo/Cyan-Verlauf
+als Akzent, Grün=Erzeugung, Rot=Verbrauch, Blau=Einspeisung/Feuchte, Amber=Gas/
+Solarthermie — für bessere Lesbarkeit auf dem Handy und einen klar eigenen Look.
 
 ## Import in vis-2
 
@@ -46,7 +63,8 @@ Handy.
 - Datenquellen (bereits bei dir vorhanden): `fronius.0`, `sonnen.0`, `ebus.0`
   (Recovair), `ebus.1` (Heizung/Solar), `km200.0`, `sonoff.0`, `shelly.1`,
   `statistics.0`, `openweathermap.0`, `mqtt.0`, `nut.0`, `0_userdata.0`
-- Icons: `/icons-mfd-svg/...` und `/vis.0/main/...` (bereits in deiner Installation vorhanden, 1:1 aus deiner echten `navigation`-View übernommen)
+- Icons: keine externen Dateien nötig — alle Nav-/Karten-Icons sind als
+  Inline-SVG-Data-URI (Emoji auf Farbverlauf-Chip) direkt in der JSON codiert.
 - Grafana unter `192.168.178.133:3000` und Energiefluss-Tool unter
   `192.168.178.133:8082` (URLs 1:1 aus deinen echten Views übernommen)
 

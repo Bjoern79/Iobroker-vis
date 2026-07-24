@@ -1,5 +1,10 @@
 # Datenpunkt-Zuordnung & Annahmen
 
+> **Hinweis (v2):** Das Layout wurde komplett neu gestaltet (Glas-Karten, eigene
+> Farben/Icons, 375px-Canvas für iPhone X, kein Bezug mehr zur klassischen
+> vis-Optik). Die Datenpunkt-Zuordnungen unten sind **unverändert** gültig —
+> es hat sich nur die Darstellung geändert, nicht die gebundenen States.
+
 Alle unten genannten Objekt-IDs stammen entweder direkt aus deinen
 hochgeladenen Original-Views (`index`, `viewHeizung`, `viewTemperatur`,
 `viewPhotovoltaik`, `view_recovair`, `view_solaranlage`, `navigation`,
