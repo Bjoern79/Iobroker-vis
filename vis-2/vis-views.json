@@ -7,7 +7,7 @@
       },
       "theme": "redmond",
       "sizex": "375",
-      "sizey": "92",
+      "sizey": "96",
       "gridSize": "10",
       "useBackground": false,
       "snapType": 0
@@ -22,7 +22,7 @@
           "left": "10px",
           "top": "6px",
           "width": "355px",
-          "height": "74px",
+          "height": "80px",
           "background": "rgba(20,23,31,0.75)",
           "backdrop-filter": "blur(18px)",
           "border": "1px solid rgba(255,255,255,0.09)",
@@ -34,12 +34,13 @@
       "e00002": {
         "tpl": "tplJquiIconNav",
         "data": {
-          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%237c6cff'%2F%3E%3Ctext%20x%3D'32'%20y%3D'43'%20font-size%3D'30'%20text-anchor%3D'middle'%3E%F0%9F%8F%A0%3C%2Ftext%3E%3C%2Fsvg%3E",
+          "g_css_background": true,
+          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%237c6cff'%2F%3E%3Cpath%20d%3D%22M14%2030%20L32%2015%20L50%2030%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M19%2027v21h26V27%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linejoin%3D%22round%22%2F%3E%3Crect%20x%3D%2228%22%20y%3D%2236%22%20width%3D%228%22%20height%3D%2212%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E",
           "nav_view": "index"
         },
         "style": {
           "left": "16.35714285714286px",
-          "top": "12px",
+          "top": "13px",
           "width": "38px",
           "height": "38px",
           "border-width": "0",
@@ -52,33 +53,36 @@
       "e00003": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Home"
+          "html": "Home",
+          "g_css_font_text": true
         },
         "style": {
           "left": "10px",
-          "top": "54px",
+          "top": "56px",
           "width": "50.714285714285715px",
-          "height": "14px",
-          "color": "#8b93a6",
-          "font-size": "9px",
+          "height": "16px",
+          "color": "#c7ccd6",
+          "font-size": "11px",
           "font-family": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif",
-          "font-weight": "600",
+          "font-weight": "700",
           "text-align": "center",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00004": {
         "tpl": "tplJquiIconNav",
         "data": {
-          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%23f97316'%2F%3E%3Ctext%20x%3D'32'%20y%3D'43'%20font-size%3D'30'%20text-anchor%3D'middle'%3E%F0%9F%94%A5%3C%2Ftext%3E%3C%2Fsvg%3E",
+          "g_css_background": true,
+          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%23f97316'%2F%3E%3Cpath%20d%3D%22M32%2014c5%209%2011%2013%2011%2023a11%2011%200%201%201-22%200c0-5%203-9%205-12%201%205%203%206%205-3z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E",
           "nav_view": "viewHeizung"
         },
         "style": {
           "left": "67.07142857142857px",
-          "top": "12px",
+          "top": "13px",
           "width": "38px",
           "height": "38px",
           "border-width": "0",
@@ -91,33 +95,36 @@
       "e00005": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Heizung"
+          "html": "Heizung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "60.714285714285715px",
-          "top": "54px",
+          "top": "56px",
           "width": "50.714285714285715px",
-          "height": "14px",
-          "color": "#8b93a6",
-          "font-size": "9px",
+          "height": "16px",
+          "color": "#c7ccd6",
+          "font-size": "11px",
           "font-family": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif",
-          "font-weight": "600",
+          "font-weight": "700",
           "text-align": "center",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00006": {
         "tpl": "tplJquiIconNav",
         "data": {
-          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%23eab308'%2F%3E%3Ctext%20x%3D'32'%20y%3D'43'%20font-size%3D'30'%20text-anchor%3D'middle'%3E%E2%9A%A1%3C%2Ftext%3E%3C%2Fsvg%3E",
+          "g_css_background": true,
+          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%23eab308'%2F%3E%3Cpath%20d%3D%22M35%2012%20L20%2037%20H29%20L26%2052%20L46%2025%20H35%20Z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E",
           "nav_view": "viewPhotovoltaik"
         },
         "style": {
           "left": "117.78571428571428px",
-          "top": "12px",
+          "top": "13px",
           "width": "38px",
           "height": "38px",
           "border-width": "0",
@@ -130,33 +137,36 @@
       "e00007": {
         "tpl": "tplHtml",
         "data": {
-          "html": "PV"
+          "html": "PV",
+          "g_css_font_text": true
         },
         "style": {
           "left": "111.42857142857143px",
-          "top": "54px",
+          "top": "56px",
           "width": "50.714285714285715px",
-          "height": "14px",
-          "color": "#8b93a6",
-          "font-size": "9px",
+          "height": "16px",
+          "color": "#c7ccd6",
+          "font-size": "11px",
           "font-family": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif",
-          "font-weight": "600",
+          "font-weight": "700",
           "text-align": "center",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00008": {
         "tpl": "tplJquiIconNav",
         "data": {
-          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%2338bdf8'%2F%3E%3Ctext%20x%3D'32'%20y%3D'43'%20font-size%3D'30'%20text-anchor%3D'middle'%3E%F0%9F%8C%AC%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E",
+          "g_css_background": true,
+          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%2338bdf8'%2F%3E%3Cpath%20d%3D%22M13%2023h26a5%205%200%201%200-5-6%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M13%2032h30a5%205%200%201%201-5%206%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M13%2041h20%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E",
           "nav_view": "viewRecovair"
         },
         "style": {
           "left": "168.5px",
-          "top": "12px",
+          "top": "13px",
           "width": "38px",
           "height": "38px",
           "border-width": "0",
@@ -169,33 +179,36 @@
       "e00009": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Lüftung"
+          "html": "Lüftung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "162.14285714285714px",
-          "top": "54px",
+          "top": "56px",
           "width": "50.714285714285715px",
-          "height": "14px",
-          "color": "#8b93a6",
-          "font-size": "9px",
+          "height": "16px",
+          "color": "#c7ccd6",
+          "font-size": "11px",
           "font-family": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif",
-          "font-weight": "600",
+          "font-weight": "700",
           "text-align": "center",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00010": {
         "tpl": "tplJquiIconNav",
         "data": {
-          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%23fb923c'%2F%3E%3Ctext%20x%3D'32'%20y%3D'43'%20font-size%3D'30'%20text-anchor%3D'middle'%3E%E2%98%80%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E",
+          "g_css_background": true,
+          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%23fb923c'%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%229%22%20fill%3D%22%23fff%22%2F%3E%3Cg%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M32%2012v6%22%2F%3E%3Cpath%20d%3D%22M32%2046v6%22%2F%3E%3Cpath%20d%3D%22M12%2032h6%22%2F%3E%3Cpath%20d%3D%22M46%2032h6%22%2F%3E%3Cpath%20d%3D%22M18%2018l4%204%22%2F%3E%3Cpath%20d%3D%22M42%2042l4%204%22%2F%3E%3Cpath%20d%3D%22M46%2018l-4%204%22%2F%3E%3Cpath%20d%3D%22M22%2042l-4%204%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
           "nav_view": "viewSolaranlage"
         },
         "style": {
           "left": "219.21428571428572px",
-          "top": "12px",
+          "top": "13px",
           "width": "38px",
           "height": "38px",
           "border-width": "0",
@@ -208,33 +221,36 @@
       "e00011": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Solar"
+          "html": "Solar",
+          "g_css_font_text": true
         },
         "style": {
           "left": "212.85714285714286px",
-          "top": "54px",
+          "top": "56px",
           "width": "50.714285714285715px",
-          "height": "14px",
-          "color": "#8b93a6",
-          "font-size": "9px",
+          "height": "16px",
+          "color": "#c7ccd6",
+          "font-size": "11px",
           "font-family": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif",
-          "font-weight": "600",
+          "font-weight": "700",
           "text-align": "center",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00012": {
         "tpl": "tplJquiIconNav",
         "data": {
-          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%2334d399'%2F%3E%3Ctext%20x%3D'32'%20y%3D'43'%20font-size%3D'30'%20text-anchor%3D'middle'%3E%F0%9F%8C%A1%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E",
+          "g_css_background": true,
+          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%2334d399'%2F%3E%3Crect%20x%3D%2227%22%20y%3D%2214%22%20width%3D%2210%22%20height%3D%2226%22%20rx%3D%225%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2244%22%20r%3D%228%22%20fill%3D%22%23fff%22%2F%3E%3Cline%20x1%3D%2232%22%20y1%3D%2222%22%20x2%3D%2232%22%20y2%3D%2240%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E",
           "nav_view": "viewTemperatur"
         },
         "style": {
           "left": "269.9285714285714px",
-          "top": "12px",
+          "top": "13px",
           "width": "38px",
           "height": "38px",
           "border-width": "0",
@@ -247,33 +263,36 @@
       "e00013": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Klima"
+          "html": "Klima",
+          "g_css_font_text": true
         },
         "style": {
           "left": "263.57142857142856px",
-          "top": "54px",
+          "top": "56px",
           "width": "50.714285714285715px",
-          "height": "14px",
-          "color": "#8b93a6",
-          "font-size": "9px",
+          "height": "16px",
+          "color": "#c7ccd6",
+          "font-size": "11px",
           "font-family": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif",
-          "font-weight": "600",
+          "font-weight": "700",
           "text-align": "center",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00014": {
         "tpl": "tplJquiIconNav",
         "data": {
-          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%23a78bfa'%2F%3E%3Ctext%20x%3D'32'%20y%3D'43'%20font-size%3D'30'%20text-anchor%3D'middle'%3E%F0%9F%93%8A%3C%2Ftext%3E%3C%2Fsvg%3E",
+          "g_css_background": true,
+          "src": "data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'%23a78bfa'%2F%3E%3Crect%20x%3D%2216%22%20y%3D%2234%22%20width%3D%229%22%20height%3D%2216%22%20fill%3D%22%23fff%22%2F%3E%3Crect%20x%3D%2228%22%20y%3D%2224%22%20width%3D%229%22%20height%3D%2226%22%20fill%3D%22%23fff%22%2F%3E%3Crect%20x%3D%2240%22%20y%3D%2216%22%20width%3D%229%22%20height%3D%2234%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E",
           "nav_view": "viewStatistics"
         },
         "style": {
           "left": "320.6428571428571px",
-          "top": "12px",
+          "top": "13px",
           "width": "38px",
           "height": "38px",
           "border-width": "0",
@@ -286,21 +305,23 @@
       "e00015": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Stats"
+          "html": "Stats",
+          "g_css_font_text": true
         },
         "style": {
           "left": "314.2857142857143px",
-          "top": "54px",
+          "top": "56px",
           "width": "50.714285714285715px",
-          "height": "14px",
-          "color": "#8b93a6",
-          "font-size": "9px",
+          "height": "16px",
+          "color": "#c7ccd6",
+          "font-size": "11px",
           "font-family": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif",
-          "font-weight": "600",
+          "font-weight": "700",
           "text-align": "center",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       }
@@ -325,21 +346,28 @@
       "e00001": {
         "tpl": "tplHtml",
         "data": {
-          "html": "<div style=\"width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg, #7c6cff, #4fd1ff);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 16px rgba(124,108,255,0.35)\">🏠</div>"
+          "html": ""
         },
         "style": {
           "left": "16px",
           "top": "12px",
           "width": "44px",
           "height": "44px",
-          "background-color": "transparent"
+          "border-radius": "14px",
+          "background": "linear-gradient(135deg, #7c6cff, #4fd1ff)",
+          "background-image": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'none'%2F%3E%3Cpath%20d%3D%22M14%2030%20L32%2015%20L50%2030%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M19%2027v21h26V27%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linejoin%3D%22round%22%2F%3E%3Crect%20x%3D%2228%22%20y%3D%2236%22%20width%3D%228%22%20height%3D%2212%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E\")",
+          "background-size": "26px 26px",
+          "background-position": "center",
+          "background-repeat": "no-repeat",
+          "box-shadow": "0 6px 16px rgba(124,108,255,0.35)"
         },
         "widgetSet": "basic"
       },
       "e00002": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Übersicht"
+          "html": "Übersicht",
+          "g_css_font_text": true
         },
         "style": {
           "left": "68px",
@@ -353,7 +381,8 @@
           "text-align": "left",
           "line-height": "44px",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -419,7 +448,8 @@
       "e00006": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Fronius · Jetzt"
+          "html": "Fronius · Jetzt",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -434,6 +464,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -441,7 +472,8 @@
       "e00007": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Erzeugung"
+          "html": "Erzeugung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -456,6 +488,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -463,7 +496,8 @@
       "e00008": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Einspeisung"
+          "html": "Einspeisung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -478,6 +512,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -485,7 +520,8 @@
       "e00009": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Verbrauch"
+          "html": "Verbrauch",
+          "g_css_font_text": true
         },
         "style": {
           "left": "251.33333333333334px",
@@ -500,6 +536,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -617,7 +654,8 @@
       "e00015": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Sonnenbatterie · Heute"
+          "html": "Sonnenbatterie · Heute",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -632,6 +670,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -657,7 +696,8 @@
       "e00017": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Produktion"
+          "html": "Produktion",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -672,6 +712,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -679,7 +720,8 @@
       "e00018": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Verbrauch"
+          "html": "Verbrauch",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -694,6 +736,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -751,7 +794,8 @@
       "e00021": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Prognose heute / morgen"
+          "html": "Prognose heute / morgen",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -766,6 +810,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -858,7 +903,8 @@
       "e00026": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Logarex · Zähler"
+          "html": "Logarex · Zähler",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -873,6 +919,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -880,7 +927,8 @@
       "e00027": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Einspeisung heute"
+          "html": "Einspeisung heute",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -895,6 +943,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -902,7 +951,8 @@
       "e00028": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Bezug heute"
+          "html": "Bezug heute",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -917,6 +967,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -974,7 +1025,8 @@
       "e00031": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Gesamt Einspeisung / Bezug"
+          "html": "Gesamt Einspeisung / Bezug",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -989,6 +1041,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -1099,7 +1152,8 @@
       "e00037": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Gas"
+          "html": "Gas",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -1114,6 +1168,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -1146,7 +1201,8 @@
       "e00039": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Heute"
+          "html": "Heute",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -1161,6 +1217,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -1228,7 +1285,8 @@
       "e00043": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Wasser"
+          "html": "Wasser",
+          "g_css_font_text": true
         },
         "style": {
           "left": "193.5px",
@@ -1243,6 +1301,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -1275,7 +1334,8 @@
       "e00045": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Heute"
+          "html": "Heute",
+          "g_css_font_text": true
         },
         "style": {
           "left": "193.5px",
@@ -1290,6 +1350,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -1357,7 +1418,8 @@
       "e00049": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Solarthermie"
+          "html": "Solarthermie",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -1372,6 +1434,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -1379,7 +1442,8 @@
       "e00050": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Kollektor"
+          "html": "Kollektor",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -1394,6 +1458,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -1401,7 +1466,8 @@
       "e00051": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Speicher oben"
+          "html": "Speicher oben",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -1416,6 +1482,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -1423,7 +1490,8 @@
       "e00052": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Speicher unten"
+          "html": "Speicher unten",
+          "g_css_font_text": true
         },
         "style": {
           "left": "251.33333333333334px",
@@ -1438,6 +1506,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -1555,7 +1624,8 @@
       "e00058": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Raumklima"
+          "html": "Raumklima",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -1570,6 +1640,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -1577,7 +1648,8 @@
       "e00059": {
         "tpl": "tplHtml",
         "data": {
-          "html": "DG"
+          "html": "DG",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -1591,7 +1663,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -1673,7 +1746,8 @@
       "e00063": {
         "tpl": "tplHtml",
         "data": {
-          "html": "OG"
+          "html": "OG",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -1687,7 +1761,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -1769,7 +1844,8 @@
       "e00067": {
         "tpl": "tplHtml",
         "data": {
-          "html": "EG"
+          "html": "EG",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -1783,7 +1859,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -1865,7 +1942,8 @@
       "e00071": {
         "tpl": "tplHtml",
         "data": {
-          "html": "KG"
+          "html": "KG",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -1879,7 +1957,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -1996,7 +2075,8 @@
       "e00077": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Lüftung · Schnellzugriff"
+          "html": "Lüftung · Schnellzugriff",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2011,6 +2091,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -2018,7 +2099,8 @@
       "e00078": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Anlage"
+          "html": "Anlage",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2032,7 +2114,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -2074,7 +2157,8 @@
       "e00080": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Lüften (30m)"
+          "html": "Lüften (30m)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2088,7 +2172,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -2130,7 +2215,8 @@
       "e00082": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Intensiv (15m)"
+          "html": "Intensiv (15m)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2144,7 +2230,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -2221,7 +2308,8 @@
       "e00086": {
         "tpl": "tplHtml",
         "data": {
-          "html": "USV"
+          "html": "USV",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2236,6 +2324,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -2243,7 +2332,8 @@
       "e00087": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Verbindung"
+          "html": "Verbindung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2257,7 +2347,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -2299,7 +2390,8 @@
       "e00089": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Batterie"
+          "html": "Batterie",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2313,7 +2405,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -2380,7 +2473,8 @@
       "e00093": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Beschattung"
+          "html": "Beschattung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2395,6 +2489,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -2402,7 +2497,8 @@
       "e00094": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Sonnenschutz aktiv"
+          "html": "Sonnenschutz aktiv",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2416,7 +2512,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -2490,21 +2587,28 @@
       "e00001": {
         "tpl": "tplHtml",
         "data": {
-          "html": "<div style=\"width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg, #7c6cff, #4fd1ff);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 16px rgba(124,108,255,0.35)\">🔥</div>"
+          "html": ""
         },
         "style": {
           "left": "16px",
           "top": "12px",
           "width": "44px",
           "height": "44px",
-          "background-color": "transparent"
+          "border-radius": "14px",
+          "background": "linear-gradient(135deg, #7c6cff, #4fd1ff)",
+          "background-image": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'none'%2F%3E%3Cpath%20d%3D%22M32%2014c5%209%2011%2013%2011%2023a11%2011%200%201%201-22%200c0-5%203-9%205-12%201%205%203%206%205-3z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E\")",
+          "background-size": "26px 26px",
+          "background-position": "center",
+          "background-repeat": "no-repeat",
+          "box-shadow": "0 6px 16px rgba(124,108,255,0.35)"
         },
         "widgetSet": "basic"
       },
       "e00002": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Heizung"
+          "html": "Heizung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "68px",
@@ -2518,7 +2622,8 @@
           "text-align": "left",
           "line-height": "44px",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -2584,7 +2689,8 @@
       "e00006": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Heizkreis 1 (Mischer)"
+          "html": "Heizkreis 1 (Mischer)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2599,6 +2705,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -2606,7 +2713,8 @@
       "e00007": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Vorlauf Ist"
+          "html": "Vorlauf Ist",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2621,6 +2729,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -2628,7 +2737,8 @@
       "e00008": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Vorlauf Soll"
+          "html": "Vorlauf Soll",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -2643,6 +2753,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -2700,7 +2811,8 @@
       "e00011": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Status"
+          "html": "Status",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2715,6 +2827,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -2774,7 +2887,8 @@
       "e00015": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Kessel"
+          "html": "Kessel",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2789,6 +2903,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -2796,7 +2911,8 @@
       "e00016": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Vorlauf Ist"
+          "html": "Vorlauf Ist",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2811,6 +2927,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -2818,7 +2935,8 @@
       "e00017": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Vorlauf Soll"
+          "html": "Vorlauf Soll",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -2833,6 +2951,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -2840,7 +2959,8 @@
       "e00018": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Wasserdruck"
+          "html": "Wasserdruck",
+          "g_css_font_text": true
         },
         "style": {
           "left": "251.33333333333334px",
@@ -2855,6 +2975,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -2972,7 +3093,8 @@
       "e00024": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Wärmeerzeuger (KM200)"
+          "html": "Wärmeerzeuger (KM200)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -2987,6 +3109,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -2994,7 +3117,8 @@
       "e00025": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Betriebsart"
+          "html": "Betriebsart",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -3009,6 +3133,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3033,7 +3158,8 @@
       "e00027": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Status"
+          "html": "Status",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -3048,6 +3174,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3072,7 +3199,8 @@
       "e00029": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Leistung"
+          "html": "Leistung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -3087,6 +3215,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3094,7 +3223,8 @@
       "e00030": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Abgastemp."
+          "html": "Abgastemp.",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -3109,6 +3239,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3201,7 +3332,8 @@
       "e00035": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Solarspeicher (Warmwasser)"
+          "html": "Solarspeicher (Warmwasser)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -3216,6 +3348,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3223,7 +3356,8 @@
       "e00036": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Oben"
+          "html": "Oben",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -3238,6 +3372,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3245,7 +3380,8 @@
       "e00037": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Unten"
+          "html": "Unten",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -3260,6 +3396,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3352,7 +3489,8 @@
       "e00042": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Gaszähler"
+          "html": "Gaszähler",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -3367,6 +3505,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3374,7 +3513,8 @@
       "e00043": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Verbrauch (Diff)"
+          "html": "Verbrauch (Diff)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -3389,6 +3529,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3396,7 +3537,8 @@
       "e00044": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Zählerstand"
+          "html": "Zählerstand",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -3411,6 +3553,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3468,7 +3611,8 @@
       "e00047": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Verbrauch %"
+          "html": "Verbrauch %",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -3483,6 +3627,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3490,7 +3635,8 @@
       "e00048": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Ø-Vergleich"
+          "html": "Ø-Vergleich",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -3505,6 +3651,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3512,7 +3659,8 @@
       "e00049": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Vorjahr"
+          "html": "Vorjahr",
+          "g_css_font_text": true
         },
         "style": {
           "left": "251.33333333333334px",
@@ -3527,6 +3675,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3660,21 +3809,28 @@
       "e00001": {
         "tpl": "tplHtml",
         "data": {
-          "html": "<div style=\"width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg, #7c6cff, #4fd1ff);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 16px rgba(124,108,255,0.35)\">⚡</div>"
+          "html": ""
         },
         "style": {
           "left": "16px",
           "top": "12px",
           "width": "44px",
           "height": "44px",
-          "background-color": "transparent"
+          "border-radius": "14px",
+          "background": "linear-gradient(135deg, #7c6cff, #4fd1ff)",
+          "background-image": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'none'%2F%3E%3Cpath%20d%3D%22M35%2012%20L20%2037%20H29%20L26%2052%20L46%2025%20H35%20Z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E\")",
+          "background-size": "26px 26px",
+          "background-position": "center",
+          "background-repeat": "no-repeat",
+          "box-shadow": "0 6px 16px rgba(124,108,255,0.35)"
         },
         "widgetSet": "basic"
       },
       "e00002": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Photovoltaik"
+          "html": "Photovoltaik",
+          "g_css_font_text": true
         },
         "style": {
           "left": "68px",
@@ -3688,7 +3844,8 @@
           "text-align": "left",
           "line-height": "44px",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -3792,7 +3949,8 @@
       "e00008": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Sonnen Wechselrichter"
+          "html": "Sonnen Wechselrichter",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -3807,6 +3965,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3814,7 +3973,8 @@
       "e00009": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Frequenz"
+          "html": "Frequenz",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -3829,6 +3989,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3836,7 +3997,8 @@
       "e00010": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Spannung"
+          "html": "Spannung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -3851,6 +4013,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -3908,7 +4071,8 @@
       "e00013": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Vollladung seit / Software"
+          "html": "Vollladung seit / Software",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -3923,6 +4087,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -4009,7 +4174,8 @@
       "e00018": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Relais-Steuerung"
+          "html": "Relais-Steuerung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4024,6 +4190,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -4031,7 +4198,8 @@
       "e00019": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Verbindung"
+          "html": "Verbindung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4045,7 +4213,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -4087,7 +4256,8 @@
       "e00021": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Verbrauch Relay"
+          "html": "Verbrauch Relay",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4101,7 +4271,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -4143,7 +4314,8 @@
       "e00023": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Reduktion 1 Relay"
+          "html": "Reduktion 1 Relay",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4157,7 +4329,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -4199,7 +4372,8 @@
       "e00025": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Reduktion 2 Relay"
+          "html": "Reduktion 2 Relay",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4213,7 +4387,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -4287,21 +4462,28 @@
       "e00001": {
         "tpl": "tplHtml",
         "data": {
-          "html": "<div style=\"width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg, #7c6cff, #4fd1ff);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 16px rgba(124,108,255,0.35)\">🌬️</div>"
+          "html": ""
         },
         "style": {
           "left": "16px",
           "top": "12px",
           "width": "44px",
           "height": "44px",
-          "background-color": "transparent"
+          "border-radius": "14px",
+          "background": "linear-gradient(135deg, #7c6cff, #4fd1ff)",
+          "background-image": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'none'%2F%3E%3Cpath%20d%3D%22M13%2023h26a5%205%200%201%200-5-6%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M13%2032h30a5%205%200%201%201-5%206%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M13%2041h20%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E\")",
+          "background-size": "26px 26px",
+          "background-position": "center",
+          "background-repeat": "no-repeat",
+          "box-shadow": "0 6px 16px rgba(124,108,255,0.35)"
         },
         "widgetSet": "basic"
       },
       "e00002": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Lüftung"
+          "html": "Lüftung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "68px",
@@ -4315,7 +4497,8 @@
           "text-align": "left",
           "line-height": "44px",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -4357,7 +4540,8 @@
       "e00005": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Luftströme"
+          "html": "Luftströme",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4372,6 +4556,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -4379,7 +4564,8 @@
       "e00006": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Frischluft"
+          "html": "Frischluft",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4394,6 +4580,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -4401,7 +4588,8 @@
       "e00007": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Zuluft"
+          "html": "Zuluft",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -4416,6 +4604,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -4473,7 +4662,8 @@
       "e00010": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Abluft"
+          "html": "Abluft",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4488,6 +4678,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -4495,7 +4686,8 @@
       "e00011": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Fortluft"
+          "html": "Fortluft",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -4510,6 +4702,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -4602,7 +4795,8 @@
       "e00016": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Betrieb"
+          "html": "Betrieb",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4617,6 +4811,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -4624,7 +4819,8 @@
       "e00017": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Feuchte (Abluft)"
+          "html": "Feuchte (Abluft)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4639,6 +4835,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -4646,7 +4843,8 @@
       "e00018": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Volumenstrom"
+          "html": "Volumenstrom",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -4661,6 +4859,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -4718,7 +4917,8 @@
       "e00021": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Verbrauch"
+          "html": "Verbrauch",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4733,6 +4933,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -4825,7 +5026,8 @@
       "e00026": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Steuerung"
+          "html": "Steuerung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4840,6 +5042,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -4847,7 +5050,8 @@
       "e00027": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Start / Betrieb"
+          "html": "Start / Betrieb",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4861,7 +5065,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -4903,7 +5108,8 @@
       "e00029": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Lüften (30m)"
+          "html": "Lüften (30m)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4917,7 +5123,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -4959,7 +5166,8 @@
       "e00031": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Intensivlüften (15m)"
+          "html": "Intensivlüften (15m)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -4973,7 +5181,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -5015,7 +5224,8 @@
       "e00033": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Automatischer Stop"
+          "html": "Automatischer Stop",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5029,7 +5239,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -5071,7 +5282,8 @@
       "e00035": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Nachlaufzeit aktiv"
+          "html": "Nachlaufzeit aktiv",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5085,7 +5297,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -5127,7 +5340,8 @@
       "e00037": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Ziel Feuchtigkeit"
+          "html": "Ziel Feuchtigkeit",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5142,6 +5356,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -5207,7 +5422,8 @@
       "e00041": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Klima"
+          "html": "Klima",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5222,6 +5438,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -5229,7 +5446,8 @@
       "e00042": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Außen"
+          "html": "Außen",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5244,6 +5462,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -5301,7 +5520,8 @@
       "e00045": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Innen"
+          "html": "Innen",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5316,6 +5536,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -5405,21 +5626,28 @@
       "e00001": {
         "tpl": "tplHtml",
         "data": {
-          "html": "<div style=\"width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg, #7c6cff, #4fd1ff);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 16px rgba(124,108,255,0.35)\">☀️</div>"
+          "html": ""
         },
         "style": {
           "left": "16px",
           "top": "12px",
           "width": "44px",
           "height": "44px",
-          "background-color": "transparent"
+          "border-radius": "14px",
+          "background": "linear-gradient(135deg, #7c6cff, #4fd1ff)",
+          "background-image": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'none'%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%229%22%20fill%3D%22%23fff%22%2F%3E%3Cg%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M32%2012v6%22%2F%3E%3Cpath%20d%3D%22M32%2046v6%22%2F%3E%3Cpath%20d%3D%22M12%2032h6%22%2F%3E%3Cpath%20d%3D%22M46%2032h6%22%2F%3E%3Cpath%20d%3D%22M18%2018l4%204%22%2F%3E%3Cpath%20d%3D%22M42%2042l4%204%22%2F%3E%3Cpath%20d%3D%22M46%2018l-4%204%22%2F%3E%3Cpath%20d%3D%22M22%2042l-4%204%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E\")",
+          "background-size": "26px 26px",
+          "background-position": "center",
+          "background-repeat": "no-repeat",
+          "box-shadow": "0 6px 16px rgba(124,108,255,0.35)"
         },
         "widgetSet": "basic"
       },
       "e00002": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Solaranlage"
+          "html": "Solaranlage",
+          "g_css_font_text": true
         },
         "style": {
           "left": "68px",
@@ -5433,7 +5661,8 @@
           "text-align": "left",
           "line-height": "44px",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -5499,7 +5728,8 @@
       "e00006": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Kollektor"
+          "html": "Kollektor",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5514,6 +5744,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -5521,7 +5752,8 @@
       "e00007": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Temperatur"
+          "html": "Temperatur",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5536,6 +5768,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -5543,7 +5776,8 @@
       "e00008": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Pumpe"
+          "html": "Pumpe",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -5558,6 +5792,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -5650,7 +5885,8 @@
       "e00013": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Speicher"
+          "html": "Speicher",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5665,6 +5901,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -5672,7 +5909,8 @@
       "e00014": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Oben"
+          "html": "Oben",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5687,6 +5925,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -5694,7 +5933,8 @@
       "e00015": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Unten"
+          "html": "Unten",
+          "g_css_font_text": true
         },
         "style": {
           "left": "133.66666666666669px",
@@ -5709,6 +5949,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -5801,7 +6042,8 @@
       "e00020": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Speicher laden erzwingen"
+          "html": "Speicher laden erzwingen",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5816,6 +6058,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -5893,7 +6136,8 @@
       "e00024": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Regelung"
+          "html": "Regelung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5908,6 +6152,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -5915,7 +6160,8 @@
       "e00025": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Speicher Max (PWM off)"
+          "html": "Speicher Max (PWM off)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5929,7 +6175,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -5961,7 +6208,8 @@
       "e00027": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Kolländerung / 1min"
+          "html": "Kolländerung / 1min",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -5975,7 +6223,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -6007,7 +6256,8 @@
       "e00029": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Hysterese Speicher Max"
+          "html": "Hysterese Speicher Max",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -6021,7 +6271,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -6053,7 +6304,8 @@
       "e00031": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Mittelwert Kollektor (5m)"
+          "html": "Mittelwert Kollektor (5m)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -6067,7 +6319,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -6099,7 +6352,8 @@
       "e00033": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Einschaltdifferenz"
+          "html": "Einschaltdifferenz",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -6113,7 +6367,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -6145,7 +6400,8 @@
       "e00035": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Deadband"
+          "html": "Deadband",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -6159,7 +6415,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -6191,7 +6448,8 @@
       "e00037": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Hysterese-Rampe"
+          "html": "Hysterese-Rampe",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -6205,7 +6463,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -6237,7 +6496,8 @@
       "e00039": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Hysterese"
+          "html": "Hysterese",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -6251,7 +6511,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -6334,21 +6595,28 @@
       "e00001": {
         "tpl": "tplHtml",
         "data": {
-          "html": "<div style=\"width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg, #7c6cff, #4fd1ff);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 16px rgba(124,108,255,0.35)\">🌡️</div>"
+          "html": ""
         },
         "style": {
           "left": "16px",
           "top": "12px",
           "width": "44px",
           "height": "44px",
-          "background-color": "transparent"
+          "border-radius": "14px",
+          "background": "linear-gradient(135deg, #7c6cff, #4fd1ff)",
+          "background-image": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'none'%2F%3E%3Crect%20x%3D%2227%22%20y%3D%2214%22%20width%3D%2210%22%20height%3D%2226%22%20rx%3D%225%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2244%22%20r%3D%228%22%20fill%3D%22%23fff%22%2F%3E%3Cline%20x1%3D%2232%22%20y1%3D%2222%22%20x2%3D%2232%22%20y2%3D%2240%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E\")",
+          "background-size": "26px 26px",
+          "background-position": "center",
+          "background-repeat": "no-repeat",
+          "box-shadow": "0 6px 16px rgba(124,108,255,0.35)"
         },
         "widgetSet": "basic"
       },
       "e00002": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Temperatur"
+          "html": "Temperatur",
+          "g_css_font_text": true
         },
         "style": {
           "left": "68px",
@@ -6362,7 +6630,8 @@
           "text-align": "left",
           "line-height": "44px",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -6428,7 +6697,8 @@
       "e00006": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Räume (Shelly H&T)"
+          "html": "Räume (Shelly H&T)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -6443,6 +6713,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -6450,7 +6721,8 @@
       "e00007": {
         "tpl": "tplHtml",
         "data": {
-          "html": "EG"
+          "html": "EG",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -6464,7 +6736,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -6596,7 +6869,8 @@
       "e00013": {
         "tpl": "tplHtml",
         "data": {
-          "html": "KG"
+          "html": "KG",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -6610,7 +6884,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -6742,7 +7017,8 @@
       "e00019": {
         "tpl": "tplHtml",
         "data": {
-          "html": "DG"
+          "html": "DG",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -6756,7 +7032,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -6888,7 +7165,8 @@
       "e00025": {
         "tpl": "tplHtml",
         "data": {
-          "html": "OG"
+          "html": "OG",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -6902,7 +7180,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -7069,7 +7348,8 @@
       "e00033": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Außen / Innen · abs. Feuchte"
+          "html": "Außen / Innen · abs. Feuchte",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -7084,6 +7364,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -7091,7 +7372,8 @@
       "e00034": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Außen"
+          "html": "Außen",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -7106,6 +7388,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -7163,7 +7446,8 @@
       "e00037": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Innen"
+          "html": "Innen",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -7178,6 +7462,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.4px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -7245,7 +7530,8 @@
       "e00041": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Steuerung"
+          "html": "Steuerung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -7260,6 +7546,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -7267,7 +7554,8 @@
       "e00042": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Lüften (Feuchte-Trigger)"
+          "html": "Lüften (Feuchte-Trigger)",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -7281,7 +7569,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -7323,7 +7612,8 @@
       "e00044": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Multimedia"
+          "html": "Multimedia",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -7337,7 +7627,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -7449,21 +7740,28 @@
       "e00001": {
         "tpl": "tplHtml",
         "data": {
-          "html": "<div style=\"width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg, #7c6cff, #4fd1ff);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 16px rgba(124,108,255,0.35)\">📊</div>"
+          "html": ""
         },
         "style": {
           "left": "16px",
           "top": "12px",
           "width": "44px",
           "height": "44px",
-          "background-color": "transparent"
+          "border-radius": "14px",
+          "background": "linear-gradient(135deg, #7c6cff, #4fd1ff)",
+          "background-image": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'64'%20height%3D'64'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'18'%20fill%3D'none'%2F%3E%3Crect%20x%3D%2216%22%20y%3D%2234%22%20width%3D%229%22%20height%3D%2216%22%20fill%3D%22%23fff%22%2F%3E%3Crect%20x%3D%2228%22%20y%3D%2224%22%20width%3D%229%22%20height%3D%2226%22%20fill%3D%22%23fff%22%2F%3E%3Crect%20x%3D%2240%22%20y%3D%2216%22%20width%3D%229%22%20height%3D%2234%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E\")",
+          "background-size": "26px 26px",
+          "background-position": "center",
+          "background-repeat": "no-repeat",
+          "box-shadow": "0 6px 16px rgba(124,108,255,0.35)"
         },
         "widgetSet": "basic"
       },
       "e00002": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Statistik"
+          "html": "Statistik",
+          "g_css_font_text": true
         },
         "style": {
           "left": "68px",
@@ -7477,7 +7775,8 @@
           "text-align": "left",
           "line-height": "44px",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -7519,7 +7818,8 @@
       "e00005": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Strom"
+          "html": "Strom",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -7534,6 +7834,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -7541,7 +7842,8 @@
       "e00006": {
         "tpl": "tplHtml",
         "data": {
-          "html": "H"
+          "html": "H",
+          "g_css_font_text": true
         },
         "style": {
           "left": "90px",
@@ -7555,14 +7857,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00007": {
         "tpl": "tplHtml",
         "data": {
-          "html": "W"
+          "html": "W",
+          "g_css_font_text": true
         },
         "style": {
           "left": "140.6px",
@@ -7576,14 +7880,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00008": {
         "tpl": "tplHtml",
         "data": {
-          "html": "M"
+          "html": "M",
+          "g_css_font_text": true
         },
         "style": {
           "left": "191.2px",
@@ -7597,14 +7903,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00009": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Q"
+          "html": "Q",
+          "g_css_font_text": true
         },
         "style": {
           "left": "241.8px",
@@ -7618,14 +7926,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00010": {
         "tpl": "tplHtml",
         "data": {
-          "html": "J"
+          "html": "J",
+          "g_css_font_text": true
         },
         "style": {
           "left": "292.4px",
@@ -7639,14 +7949,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00011": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Produktion"
+          "html": "Produktion",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -7660,7 +7972,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -7792,7 +8105,8 @@
       "e00017": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Gesamt"
+          "html": "Gesamt",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -7806,7 +8120,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -7838,7 +8153,8 @@
       "e00019": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Einspeisung"
+          "html": "Einspeisung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -7852,7 +8168,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -7984,7 +8301,8 @@
       "e00025": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Gesamt"
+          "html": "Gesamt",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -7998,7 +8316,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -8030,7 +8349,8 @@
       "e00027": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Bezug"
+          "html": "Bezug",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -8044,7 +8364,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -8176,7 +8497,8 @@
       "e00033": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Gesamt"
+          "html": "Gesamt",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -8190,7 +8512,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -8257,7 +8580,8 @@
       "e00037": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Erdgas"
+          "html": "Erdgas",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -8272,6 +8596,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -8279,7 +8604,8 @@
       "e00038": {
         "tpl": "tplHtml",
         "data": {
-          "html": "H"
+          "html": "H",
+          "g_css_font_text": true
         },
         "style": {
           "left": "90px",
@@ -8293,14 +8619,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00039": {
         "tpl": "tplHtml",
         "data": {
-          "html": "W"
+          "html": "W",
+          "g_css_font_text": true
         },
         "style": {
           "left": "140.6px",
@@ -8314,14 +8642,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00040": {
         "tpl": "tplHtml",
         "data": {
-          "html": "M"
+          "html": "M",
+          "g_css_font_text": true
         },
         "style": {
           "left": "191.2px",
@@ -8335,14 +8665,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00041": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Q"
+          "html": "Q",
+          "g_css_font_text": true
         },
         "style": {
           "left": "241.8px",
@@ -8356,14 +8688,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00042": {
         "tpl": "tplHtml",
         "data": {
-          "html": "J"
+          "html": "J",
+          "g_css_font_text": true
         },
         "style": {
           "left": "292.4px",
@@ -8377,14 +8711,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00043": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Verbrauch"
+          "html": "Verbrauch",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -8398,7 +8734,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -8530,7 +8867,8 @@
       "e00049": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Gesamt"
+          "html": "Gesamt",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -8544,7 +8882,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -8611,7 +8950,8 @@
       "e00053": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Wasser"
+          "html": "Wasser",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -8626,6 +8966,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -8633,7 +8974,8 @@
       "e00054": {
         "tpl": "tplHtml",
         "data": {
-          "html": "H"
+          "html": "H",
+          "g_css_font_text": true
         },
         "style": {
           "left": "90px",
@@ -8647,14 +8989,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00055": {
         "tpl": "tplHtml",
         "data": {
-          "html": "W"
+          "html": "W",
+          "g_css_font_text": true
         },
         "style": {
           "left": "140.6px",
@@ -8668,14 +9012,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00056": {
         "tpl": "tplHtml",
         "data": {
-          "html": "M"
+          "html": "M",
+          "g_css_font_text": true
         },
         "style": {
           "left": "191.2px",
@@ -8689,14 +9035,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00057": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Q"
+          "html": "Q",
+          "g_css_font_text": true
         },
         "style": {
           "left": "241.8px",
@@ -8710,14 +9058,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00058": {
         "tpl": "tplHtml",
         "data": {
-          "html": "J"
+          "html": "J",
+          "g_css_font_text": true
         },
         "style": {
           "left": "292.4px",
@@ -8731,14 +9081,16 @@
           "text-align": "right",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
       "e00059": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Verbrauch"
+          "html": "Verbrauch",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -8752,7 +9104,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -8884,7 +9237,8 @@
       "e00065": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Gesamt"
+          "html": "Gesamt",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -8898,7 +9252,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -8965,7 +9320,8 @@
       "e00069": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Top Verbraucher · Monat"
+          "html": "Top Verbraucher · Monat",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -8980,6 +9336,7 @@
           "line-height": "1.35",
           "white-space": "pre-line",
           "letter-spacing": "0.6px",
+          "overflow": "visible",
           "text-transform": "uppercase"
         },
         "widgetSet": "basic"
@@ -8987,7 +9344,8 @@
       "e00070": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Kühlschrank"
+          "html": "Kühlschrank",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -9001,7 +9359,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -9033,7 +9392,8 @@
       "e00072": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Kühlschrank Keller"
+          "html": "Kühlschrank Keller",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -9047,7 +9407,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -9079,7 +9440,8 @@
       "e00074": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Spülmaschine"
+          "html": "Spülmaschine",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -9093,7 +9455,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -9125,7 +9488,8 @@
       "e00076": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Trockner"
+          "html": "Trockner",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -9139,7 +9503,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -9171,7 +9536,8 @@
       "e00078": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Waschmaschine"
+          "html": "Waschmaschine",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -9185,7 +9551,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -9217,7 +9584,8 @@
       "e00080": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Therme"
+          "html": "Therme",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -9231,7 +9599,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },
@@ -9263,7 +9632,8 @@
       "e00082": {
         "tpl": "tplHtml",
         "data": {
-          "html": "Lüftung"
+          "html": "Lüftung",
+          "g_css_font_text": true
         },
         "style": {
           "left": "16px",
@@ -9277,7 +9647,8 @@
           "text-align": "left",
           "line-height": "1.35",
           "white-space": "pre-line",
-          "letter-spacing": "normal"
+          "letter-spacing": "normal",
+          "overflow": "visible"
         },
         "widgetSet": "basic"
       },

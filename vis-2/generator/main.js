@@ -1,30 +1,31 @@
 const fs = require('fs');
 const H = require('./build.js');
-const { view, addW, text, header, cardBg, cardTitle, value, stringValue, listValue, lastChange, label, tileLabel, tileGrid, iconNav, emojiIcon, iframe, navInclude, mdSwitch, mdSlider, mdProgressCircular, row3, W, COL, FONT, SAFE_TOP, SAFE_BOTTOM } = H;
+const { view, addW, text, header, cardBg, cardTitle, value, stringValue, listValue, lastChange, label, tileLabel, tileGrid, iconNav, vectorIcon, iframe, navInclude, mdSwitch, mdSlider, mdProgressCircular, row3, W, COL, FONT, SAFE_TOP, SAFE_BOTTOM } = H;
 
 const project = {};
 const OUTSIDE = 'ebus.1.broadcast.messages.outsidetemp.fields.temp2.value';
 
 // ===================================================================
-// NAVIGATION — floating glass pill, emoji chip icons (no old vis assets)
+// NAVIGATION — floating glass pill, hand-drawn vector icons (no old vis assets,
+// no emoji/font rendering — see build.js GLYPHS)
 // ===================================================================
 {
   const v = view('navigation');
-  v.settings.sizex = String(W); v.settings.sizey = '92';
-  addW(v,'tplHtml',10,6,W-20,74,{html:''},{ background:'rgba(20,23,31,0.75)', 'backdrop-filter':'blur(18px)', border:`1px solid ${COL.glassBorder}`, 'border-radius':'26px', 'box-shadow':'0 10px 30px rgba(0,0,0,0.45)' });
+  v.settings.sizex = String(W); v.settings.sizey = '96';
+  addW(v,'tplHtml',10,6,W-20,80,{html:''},{ background:'rgba(20,23,31,0.75)', 'backdrop-filter':'blur(18px)', border:`1px solid ${COL.glassBorder}`, 'border-radius':'26px', 'box-shadow':'0 10px 30px rgba(0,0,0,0.45)' });
   const items = [
-    ['🏠', 'index', 'Home', COL.accentA],
-    ['🔥', 'viewHeizung', 'Heizung', '#f97316'],
-    ['⚡', 'viewPhotovoltaik', 'PV', '#eab308'],
-    ['🌬️', 'viewRecovair', 'Lüftung', '#38bdf8'],
-    ['☀️', 'viewSolaranlage', 'Solar', '#fb923c'],
-    ['🌡️', 'viewTemperatur', 'Klima', '#34d399'],
-    ['📊', 'viewStatistics', 'Stats', '#a78bfa'],
+    ['home', 'index', 'Home', COL.accentA],
+    ['flame', 'viewHeizung', 'Heizung', '#f97316'],
+    ['bolt', 'viewPhotovoltaik', 'PV', '#eab308'],
+    ['wind', 'viewRecovair', 'Lüftung', '#38bdf8'],
+    ['sun', 'viewSolaranlage', 'Solar', '#fb923c'],
+    ['thermo', 'viewTemperatur', 'Klima', '#34d399'],
+    ['chart', 'viewStatistics', 'Stats', '#a78bfa'],
   ];
   const colW = (W-20)/items.length;
-  items.forEach(([emoji,nav,cap,bg],i)=>{
-    iconNav(v, 10 + i*colW + colW/2 - 19, 12, 38, emoji, bg, nav);
-    text(v, 10+i*colW, 54, colW, 14, cap, {size:'9px', align:'center', color:COL.sub, weight:'600'});
+  items.forEach(([kind,nav,cap,bg],i)=>{
+    iconNav(v, 10 + i*colW + colW/2 - 19, 13, 38, kind, bg, nav);
+    text(v, 10+i*colW, 56, colW, 16, cap, {size:'11px', align:'center', color:'#c7ccd6', weight:'700'});
   });
   project['navigation'] = v;
 }
@@ -36,7 +37,7 @@ function endPage(v,y){ navInclude(v, y+8); v.settings.sizey = String(y + 8 + 100
 // ===================================================================
 {
   const v = view('index');
-  let y = header(v, '🏠', 'Übersicht', OUTSIDE);
+  let y = header(v, 'home', 'Übersicht', OUTSIDE);
 
   cardBg(v,16,y,W-32,108,COL.green); cardTitle(v,16,y,'Fronius · Jetzt');
   row3(v, y+38, [
@@ -129,7 +130,7 @@ function endPage(v,y){ navInclude(v, y+8); v.settings.sizey = String(y + 8 + 100
 // ===================================================================
 {
   const v = view('viewHeizung');
-  let y = header(v, '🔥', 'Heizung', OUTSIDE);
+  let y = header(v, 'flame', 'Heizung', OUTSIDE);
 
   cardBg(v,16,y,W-32,120,'#f97316'); cardTitle(v,16,y,'Heizkreis 1 (Mischer)');
   row3(v,y+38,[
@@ -190,7 +191,7 @@ function endPage(v,y){ navInclude(v, y+8); v.settings.sizey = String(y + 8 + 100
 // ===================================================================
 {
   const v = view('viewPhotovoltaik');
-  let y = header(v, '⚡', 'Photovoltaik', OUTSIDE);
+  let y = header(v, 'bolt', 'Photovoltaik', OUTSIDE);
 
   iframe(v,16,y,W-32,240,'http://192.168.178.133:8082/energiefluss/index.html?instance=0');
   y += 256;
@@ -223,7 +224,7 @@ function endPage(v,y){ navInclude(v, y+8); v.settings.sizey = String(y + 8 + 100
 // ===================================================================
 {
   const v = view('viewRecovair');
-  let y = header(v, '🌬️', 'Lüftung');
+  let y = header(v, 'wind', 'Lüftung');
 
   cardBg(v,16,y,W-32,116,'#38bdf8'); cardTitle(v,16,y,'Luftströme');
   row3(v,y+38,[
@@ -279,7 +280,7 @@ function endPage(v,y){ navInclude(v, y+8); v.settings.sizey = String(y + 8 + 100
 // ===================================================================
 {
   const v = view('viewSolaranlage');
-  let y = header(v, '☀️', 'Solaranlage', 'ebus.1.sc.messages.Coll1Sensor.fields.temp.value');
+  let y = header(v, 'sun', 'Solaranlage', 'ebus.1.sc.messages.Coll1Sensor.fields.temp.value');
 
   cardBg(v,16,y,W-32,92,'#fb923c'); cardTitle(v,16,y,'Kollektor');
   row3(v,y+38,[
@@ -328,7 +329,7 @@ function endPage(v,y){ navInclude(v, y+8); v.settings.sizey = String(y + 8 + 100
 // ===================================================================
 {
   const v = view('viewTemperatur');
-  let y = header(v, '🌡️', 'Temperatur', 'openweathermap.0.forecast.current.temperature');
+  let y = header(v, 'thermo', 'Temperatur', 'openweathermap.0.forecast.current.temperature');
 
   const rooms = [
     ['EG','shelly.1.shellyhtg3#d885ac1298d8#1'],
@@ -375,7 +376,7 @@ function endPage(v,y){ navInclude(v, y+8); v.settings.sizey = String(y + 8 + 100
 // ===================================================================
 {
   const v = view('viewStatistics');
-  let y = header(v, '📊', 'Statistik');
+  let y = header(v, 'chart', 'Statistik');
 
   const periods = [['H','day'],['W','week'],['M','month'],['Q','quarter'],['J','year']];
   const colW = (W-32-90)/5;

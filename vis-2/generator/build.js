@@ -31,12 +31,13 @@ function addW(v, tpl, x,y,w,h, data, style, widgetSet){
 }
 
 function text(v,x,y,w,h,html,opts={}){
-  return addW(v,'tplHtml',x,y,w,h,{ html }, Object.assign({ color:opts.color||COL.text, 'font-size':opts.size||'14px', 'font-family':FONT, 'font-weight':opts.weight||'400', 'text-align':opts.align||'left', 'line-height':opts.lh||'1.35', 'white-space':'pre-line', 'letter-spacing':opts.ls||'normal' }, opts.style||{}));
+  return addW(v,'tplHtml',x,y,w,h,{ html, g_css_font_text:true }, Object.assign({ color:opts.color||COL.text, 'font-size':opts.size||'14px', 'font-family':FONT, 'font-weight':opts.weight||'400', 'text-align':opts.align||'left', 'line-height':opts.lh||'1.35', 'white-space':'pre-line', 'letter-spacing':opts.ls||'normal', overflow:'visible' }, opts.style||{}));
 }
 
-// page header: icon chip + title + optional right-aligned live value
-function header(v, emoji, titleText, rightOid, rightUnit){
-  addW(v,'tplHtml',16,SAFE_TOP,44,44,{html:`<div style="width:44px;height:44px;border-radius:14px;background:${grad(COL.accentA,COL.accentB)};display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 16px rgba(124,108,255,0.35)">${emoji}</div>`},{ 'background-color':'transparent' });
+// page header: icon chip (vector glyph) + title + optional right-aligned live value
+function header(v, kind, titleText, rightOid, rightUnit){
+  const bgImg = vectorIcon(kind, 'none');
+  addW(v,'tplHtml',16,SAFE_TOP,44,44,{html:''},{ 'border-radius':'14px', background:grad(COL.accentA,COL.accentB), 'background-image':`url("${bgImg}")`, 'background-size':'26px 26px', 'background-position':'center', 'background-repeat':'no-repeat', 'box-shadow':'0 6px 16px rgba(124,108,255,0.35)' });
   text(v,68,SAFE_TOP+2,180,44,titleText,{size:'22px', weight:'700', lh:'44px'});
   if (rightOid){
     addW(v,'tplValueFloat',W-16-110,SAFE_TOP+2,110,44,{ oid:rightOid, is_comma:true, factor:'1', digits:'1', html_append_plural:' '+(rightUnit||'°C'), html_append_singular:' '+(rightUnit||'°C') },{ color:COL.text,'font-size':'22px','font-weight':'700','font-family':FONT,'text-align':'right','line-height':'44px'});
@@ -95,14 +96,28 @@ function tileGrid(v, x0, y, w, cols, items, rowH){
 
 function divider(v,x,y,w){ /* deprecated visually — kept as no-op spacer for layout compat */ return null; }
 
-function emojiIcon(emoji, bg){
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect width='64' height='64' rx='18' fill='${bg}'/><text x='32' y='43' font-size='30' text-anchor='middle'>${emoji}</text></svg>`;
+// Hand-drawn vector glyphs (pure paths/shapes, no emoji/font rendering at all —
+// emoji-in-<img>-SVG proved unreliable across renderers, so icons are 100%
+// vector geometry now: guaranteed identical look everywhere).
+const GLYPHS = {
+  home: `<path d="M14 30 L32 15 L50 30" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 27v21h26V27" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/><rect x="28" y="36" width="8" height="12" fill="#fff"/>`,
+  flame: `<path d="M32 14c5 9 11 13 11 23a11 11 0 1 1-22 0c0-5 3-9 5-12 1 5 3 6 5-3z" fill="#fff"/>`,
+  bolt: `<path d="M35 12 L20 37 H29 L26 52 L46 25 H35 Z" fill="#fff"/>`,
+  wind: `<path d="M13 23h26a5 5 0 1 0-5-6" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M13 32h30a5 5 0 1 1-5 6" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M13 41h20" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>`,
+  sun: `<circle cx="32" cy="32" r="9" fill="#fff"/><g stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="M32 12v6"/><path d="M32 46v6"/><path d="M12 32h6"/><path d="M46 32h6"/><path d="M18 18l4 4"/><path d="M42 42l4 4"/><path d="M46 18l-4 4"/><path d="M22 42l-4 4"/></g>`,
+  thermo: `<rect x="27" y="14" width="10" height="26" rx="5" fill="none" stroke="#fff" stroke-width="4"/><circle cx="32" cy="44" r="8" fill="#fff"/><line x1="32" y1="22" x2="32" y2="40" stroke="#fff" stroke-width="4" stroke-linecap="round"/>`,
+  chart: `<rect x="16" y="34" width="9" height="16" fill="#fff"/><rect x="28" y="24" width="9" height="26" fill="#fff"/><rect x="40" y="16" width="9" height="34" fill="#fff"/>`,
+};
+
+function vectorIcon(kind, bg){
+  const glyph = GLYPHS[kind] || GLYPHS.chart;
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect width='64' height='64' rx='18' fill='${bg}'/>${glyph}</svg>`;
   return 'data:image/svg+xml,' + encodeURIComponent(svg);
 }
 
-function iconNav(v,x,y,size,emoji,bg,nav_view){
-  const src = emojiIcon(emoji, bg);
-  return addW(v,'tplJquiIconNav',x,y,size,size,{ src, nav_view }, { 'border-width':'0', 'border-style':'none', background:'transparent', 'border-radius':'14px' }, 'jqui');
+function iconNav(v,x,y,size,kind,bg,nav_view){
+  const src = vectorIcon(kind, bg);
+  return addW(v,'tplJquiIconNav',x,y,size,size,{ g_css_background:true, src, nav_view }, { 'border-width':'0', 'border-style':'none', background:'transparent', 'border-radius':'14px' }, 'jqui');
 }
 
 function iframe(v,x,y,w,h,src){
@@ -142,4 +157,4 @@ function row3(v, y, oids, labels, opts={}){
   oids.forEach((o,i)=> value(v, 16+i*(colW+10), y+16, colW, 26, o.oid, Object.assign({align:'left', size:'19px', color:o.color||COL.text, unit:o.unit, digits:o.digits},opts)));
 }
 
-module.exports = { view, addW, text, header, cardBg, cardTitle, value, stringValue, listValue, lastChange, label, tileLabel, tileGrid, divider, iconNav, emojiIcon, iframe, navInclude, mdSwitch, mdSlider, mdProgressCircular, row3, W, COL, FONT, SAFE_TOP, SAFE_BOTTOM };
+module.exports = { view, addW, text, header, cardBg, cardTitle, value, stringValue, listValue, lastChange, label, tileLabel, tileGrid, divider, iconNav, vectorIcon, iframe, navInclude, mdSwitch, mdSlider, mdProgressCircular, row3, W, COL, FONT, SAFE_TOP, SAFE_BOTTOM };
