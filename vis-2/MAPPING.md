@@ -1,9 +1,11 @@
 # Datenpunkt-Zuordnung & Annahmen
 
-> **Hinweis (v2):** Das Layout wurde komplett neu gestaltet (Glas-Karten, eigene
-> Farben/Icons, 375px-Canvas für iPhone X, kein Bezug mehr zur klassischen
-> vis-Optik). Die Datenpunkt-Zuordnungen unten sind **unverändert** gültig —
-> es hat sich nur die Darstellung geändert, nicht die gebundenen States.
+> **Hinweis (aktueller Stand):** Das Dashboard ist inzwischen eine
+> eigenständige HTML-App (`html-dashboard/app/`), kein vis-2-Projekt mehr —
+> die Datenpunkt-Zuordnungen unten gelten aber unverändert weiter. Nur die
+> Darstellung hat sich mehrfach geändert (Glas-Karten → Bento-Grid mit
+> Energiefluss-Diagramm, Raum-Karussell, Balkendiagramme), nicht die
+> gebundenen ioBroker-States.
 
 Alle unten genannten Objekt-IDs stammen entweder direkt aus deinen
 hochgeladenen Original-Views (`index`, `viewHeizung`, `viewTemperatur`,
@@ -13,7 +15,7 @@ außer wo unten explizit als Annahme markiert.
 
 ## Bitte einmal prüfen (echte, aber nicht 100%ig eindeutige Zuordnungen)
 
-- **`viewStatistics`**: Für dich lag kein Original-Export dieser View vor.
+- **Statistik (`#statistik`)**: Für dich lag kein Original-Export dieser Seite vor.
   Ich habe sie aus dem bestätigten Muster
   `statistics.0.temp.sumDelta.<Quelle>.<Zeitraum>` (day/week/month/quarter/year)
   gebaut – `day` und `month` sind an anderer Stelle in deinen Daten bestätigt,
@@ -25,31 +27,20 @@ außer wo unten explizit als Annahme markiert.
   „Zählerstand“, „Verbrauch (%)“, „Ø-Vergleich“, „Vorjahr“ sind eine
   plausible, aber nicht zweifelsfrei aus der Reihenfolge im Original ableitbare
   Zuordnung zu `TotalGasLasDiff` / `TotalGas` / `TotalGasActual` /
-  `TotalGasProz` / `TotalGasLast`. Bitte einmal im Editor gegenprüfen.
+  `TotalGasProz` / `TotalGasLast`. Bitte einmal gegenprüfen (Zuordnung steht
+  in `js/app.js` in der Funktion `PAGES.heizung`).
 - **Lüftung → „Nachlaufzeit aktiv“**: im Screenshot ein Schalter, gebunden an
   `0_userdata.0.Recovair.DelayTime`. Der Name deutet eher auf einen
-  Zahlenwert (Minuten) als auf ein Boolean hin – falls der Schalter im Editor
-  nicht sauber funktioniert, hier stattdessen ein Zahlenfeld/Slider verwenden.
+  Zahlenwert (Minuten) als auf ein Boolean hin – falls der Schalter in der App
+  nicht sauber funktioniert, in `js/app.js` (`PAGES.lueftung`) die Zeile
+  `switchRow('Nachlaufzeit aktiv', ...)` durch `sliderRow(...)` ersetzen.
 - **Raumklima (Übersicht) / Räume (Temperatur-View)**: In deinem echten Setup
   werden Temperatur und Luftfeuchte pro Raum teils aus unterschiedlichen
   Sensoren gemischt (z. B. DG/OG-Temperatur aus `sonoff.0.HT-*.AM2301`, aber
   Luftfeuchte + Min/Max-Statistik aus dem jeweiligen `shellyhtg3`-Sensor). Das
   wurde 1:1 aus deiner echten Konfiguration übernommen, nicht „korrigiert“ –
-  falls das ein Versehen war, einfach im Editor die oid tauschen.
-
-## Nicht native Material-Design-Widgets genutzt für Karten/Diagramme
-
-In deiner Beispieldatei `vis2_alle_objekte` sind u. a.
-`tplVis-materialdesign-Card`, `-Chart-Bar`, `-Chart-Line-History`, `-List`
-vorhanden. Deren vollständiges Datenschema (z. B. wie Diagramm-Serien oder
-Listen-Einträge konkret gebunden werden) war in der Beispieldatei nicht mit
-echten Werten befüllt, nur mit Standard-Vorgaben. Um keine kaputten Widgets zu
-erzeugen, wurden Karten stattdessen als schlichte, gestylte Container gebaut
-(`tplHtml` mit Hintergrund/Radius) und die eigentliche Historie weiterhin über
-deine echten Grafana-iframes eingebunden. Schalter (`tplVis-materialdesign-
-Switch`) und Regler (`tplVis-materialdesign-Vuetify-Slider`) wurden dagegen
-verwendet, da hierfür ein vollständiges, echtes Beispiel aus deinen Daten
-vorlag.
+  falls das ein Versehen war, in `js/app.js` im `ROOMS`-Array die
+  entsprechende oid tauschen.
 
 ## Nicht übernommen (aus deiner echten `index`-View, aber außerhalb der 7 Tabs)
 
@@ -60,7 +51,7 @@ vorlag.
 
 ## Kern-Zuordnungen je View (Kurzfassung)
 
-**Übersicht (`index`)**
+**Übersicht (`#uebersicht`)**
 - Außentemperatur: `ebus.1.broadcast.messages.outsidetemp.fields.temp2.value`
 - Fronius Jetzt: `sonnen.0.status.production` / `sonoff.0.Smartmeter.SENSOR.LK13BE.power` / `sonnen.0.status.consumption`
 - Sonnenbatterie: `sonnen.0.status.userSoc`, `fronius.0.inverter.1.DAY_ENERGY`, `0_userdata.0.Total.PowerDay`, `0_userdata.0.SolarGraph.EnergieMaxHeute/Morgen`
@@ -82,7 +73,7 @@ vorlag.
 `sonnen.0.configurations.DE_Software`, `sonnen.0.ios.DO_12/13/14`,
 `sonnen.0.info.connection`.
 
-**Lüftung (`viewRecovair`)** – `ebus.0.recov.messages.*` (4 Luftströme,
+**Lüftung (`#lueftung`)** – `ebus.0.recov.messages.*` (4 Luftströme,
 Feuchte, Volumenstrom, Bypass), `sonoff.0.Lueftung.SENSOR.ENERGY.*`,
 Steuerung über `0_userdata.0.Recovair.*`, Klima über
 `openweathermap.0.forecast.current.temperature`,
