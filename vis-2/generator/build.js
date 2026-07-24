@@ -34,10 +34,10 @@ function text(v,x,y,w,h,html,opts={}){
   return addW(v,'tplHtml',x,y,w,h,{ html, g_css_font_text:true }, Object.assign({ color:opts.color||COL.text, 'font-size':opts.size||'14px', 'font-family':FONT, 'font-weight':opts.weight||'400', 'text-align':opts.align||'left', 'line-height':opts.lh||'1.35', 'white-space':'pre-line', 'letter-spacing':opts.ls||'normal', overflow:'visible' }, opts.style||{}));
 }
 
-// page header: icon chip (vector glyph) + title + optional right-aligned live value
+// page header: icon chip (vector glyph, clickable -> Home) + title + optional right-aligned live value
 function header(v, kind, titleText, rightOid, rightUnit){
   const bgImg = vectorIcon(kind, 'none');
-  addW(v,'tplHtml',16,SAFE_TOP,44,44,{html:''},{ 'border-radius':'14px', background:grad(COL.accentA,COL.accentB), 'background-image':`url("${bgImg}")`, 'background-size':'26px 26px', 'background-position':'center', 'background-repeat':'no-repeat', 'box-shadow':'0 6px 16px rgba(124,108,255,0.35)' });
+  addW(v,'tplJquiIconNav',16,SAFE_TOP,44,44,{ src:bgImg, nav_view:'index' },{ 'border-width':'0', 'border-style':'none', 'border-radius':'14px', background:grad(COL.accentA,COL.accentB), 'background-size':'26px 26px', 'background-position':'center', 'background-repeat':'no-repeat', 'box-shadow':'0 6px 16px rgba(124,108,255,0.35)', cursor:'pointer' }, 'jqui');
   text(v,68,SAFE_TOP+2,180,44,titleText,{size:'22px', weight:'700', lh:'44px'});
   if (rightOid){
     addW(v,'tplValueFloat',W-16-110,SAFE_TOP+2,110,44,{ oid:rightOid, is_comma:true, factor:'1', digits:'1', html_append_plural:' '+(rightUnit||'°C'), html_append_singular:' '+(rightUnit||'°C') },{ color:COL.text,'font-size':'22px','font-weight':'700','font-family':FONT,'text-align':'right','line-height':'44px'});
