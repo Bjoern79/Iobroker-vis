@@ -8,10 +8,15 @@ Tab-Bar unten (reines CSS, kein vis-Widget), und Live-Daten über den
 
 ## Deployment
 
-1. Den kompletten Ordner `app/` (mit allen Unterordnern `css/`, `js/`,
-   `icons/`) **als Ganzes** auf einen Webserver hochladen — z. B. wieder
-   über ioBroker Admin → Dateien → Instanz `vis-2-beta.0` (wie schon bei
-   `uebersicht.html`), Ordnerstruktur dabei beibehalten.
+1. Den kompletten Ordner `app/` (mit dem Unterordner `icons/`) **als Ganzes**
+   auf einen Webserver hochladen — z. B. wieder über ioBroker Admin →
+   Dateien → Instanz `vis-2-beta.0`, Ordnerstruktur dabei beibehalten.
+   **Wichtig:** `app.css`/`app.js` liegen bewusst direkt neben `index.html`
+   (keine `css/`/`js`-Unterordner) — manche vis-Adapter reservieren diese
+   Pfadnamen selbst für ihre eigenen Dateien, was sonst zu Kollisionen führt
+   (Symptom: der Server liefert für `js/app.js` den Inhalt von `index.html`
+   zurück statt der echten Datei → Seite bleibt schwarz, weil das Skript nie
+   ausgeführt wird).
 2. Danach ist die App erreichbar unter z. B.
    `http://192.168.178.133:8082/vis-2-beta.0/app/index.html`.
 3. Auf dem iPhone in Safari öffnen → Teilen-Button → **Zum Home-Bildschirm** →
@@ -20,14 +25,15 @@ Tab-Bar unten (reines CSS, kein vis-Widget), und Live-Daten über den
 ## Struktur
 
 - `index.html` — App-Shell (lädt CSS/JS, bindet Manifest + Service Worker ein)
-- `css/app.css` — komplettes Design (Karten, Kacheln, Schalter, Slider, Nav)
-- `js/app.js` — Seiten-Inhalte (7× Kartenlisten mit echten Objekt-IDs),
+- `app.css` — komplettes Design (Karten, Kacheln, Schalter, Slider, Nav)
+- `app.js` — Seiten-Inhalte (7× Kartenlisten mit echten Objekt-IDs),
   Client-Routing über `location.hash` (`#uebersicht`, `#heizung`, `#pv`,
   `#lueftung`, `#solar`, `#klima`, `#statistik`), Live-Polling alle 4s über
   `simple-api`, Schreibzugriff für Schalter/Regler über `/set/<id>?value=`.
 - `manifest.json` + `icons/` — PWA-Icon/Metadaten
-- `sw.js` — Service Worker, cached nur die App-Shell selbst; Datenabfragen
-  an `simple-api` (anderer Host/Port) werden nie gecacht.
+- `sw.js` — Service Worker: `app.css`/`app.js`/`index.html` immer frisch vom
+  Server (network-first), nur `manifest.json`/Icons sind cache-first.
+  Datenabfragen an `simple-api` (anderer Host/Port) werden nie gecacht.
 
 ## Bekannte Einschränkungen
 
