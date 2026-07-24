@@ -30,7 +30,7 @@ const OUTSIDE = 'ebus.1.broadcast.messages.outsidetemp.fields.temp2.value';
   project['navigation'] = v;
 }
 
-function endPage(v,y){ navInclude(v, y+8); v.settings.sizey = String(y + 8 + 100); }
+function endPage(v,y){ navInclude(v); v.settings.sizey = String(y + 8 + 110); }
 
 // ===================================================================
 // INDEX (Übersicht)

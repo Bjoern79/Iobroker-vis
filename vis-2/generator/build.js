@@ -20,7 +20,11 @@ const FONT = "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', s
 function grad(a,b,deg){ return `linear-gradient(${deg||135}deg, ${a}, ${b})`; }
 
 function view(name){
-  return { settings:{ style:{ 'background-color':COL.bg1, background: `radial-gradient(1200px 600px at 20% -10%, ${COL.bg2}, ${COL.bg1} 60%)` }, theme:'redmond', sizex:String(W), sizey:'1200', gridSize:'10', useBackground:false, snapType:0 }, widgets:{}, name, filterList:[] };
+  return { settings:{ style:{
+      'background-color':COL.bg1,
+      background: `radial-gradient(1200px 600px at 20% -10%, ${COL.bg2}, ${COL.bg1} 60%)`,
+      overflowY:'auto', overflowX:'hidden', '-webkit-overflow-scrolling':'touch'
+    }, theme:'redmond', sizex:String(W), sizey:'1200', gridSize:'10', useBackground:false, snapType:0 }, widgets:{}, name, filterList:[] };
 }
 
 function addW(v, tpl, x,y,w,h, data, style, widgetSet){
@@ -124,8 +128,14 @@ function iframe(v,x,y,w,h,src){
   return addW(v,'tplIFrame',x,y,w,h,{ src, seamless:'true', refreshInterval:'0' },{ border:'none', 'border-radius':'20px', overflow:'hidden', 'box-shadow':'0 8px 24px rgba(0,0,0,0.35)' });
 }
 
-function navInclude(v, y){
-  return addW(v,'tplContainerView',0,y,W,90,{ contains_view:'navigation' },{ background:'transparent' });
+// Fixed/sticky bottom tab bar (iOS-app style) — stays visible while the page
+// content scrolls underneath, instead of being just another in-flow widget.
+function navInclude(v){
+  return addW(v,'tplContainerView',0,0,W,96,{ contains_view:'navigation' },{
+    background:'transparent', position:'fixed', top:'auto', bottom:'0px',
+    left:'50%', transform:'translateX(-50%)', 'max-width':W+'px', width:'100%',
+    'z-index':1000
+  });
 }
 
 function mdSwitch(v,x,y,w,h,oid){
