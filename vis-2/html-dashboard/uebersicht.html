@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Übersicht</title>
+<style>
+  :root{
+    --bg1:#0b0c12; --bg2:#14171f;
+    --glass:rgba(255,255,255,0.055); --glassBorder:rgba(255,255,255,0.09);
+    --text:#f2f4f8; --sub:#8b93a6;
+    --accentA:#7c6cff; --accentB:#4fd1ff;
+    --green:#34d399; --red:#fb7185; --blue:#60a5fa; --amber:#fbbf24;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg1);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  body{
+    background:radial-gradient(1200px 600px at 20% -10%, var(--bg2), var(--bg1) 60%);
+    min-height:100vh;
+    /* extra bottom padding: the vis nav bar floats fixed on top of this iframe at ~96px tall */
+    padding:calc(env(safe-area-inset-top) + 12px) 16px calc(env(safe-area-inset-bottom) + 116px);
+  }
+  .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+  .header h1{font-size:22px;font-weight:700;margin:0;}
+  .header .out{font-size:22px;font-weight:700;}
+  .card{
+    background:var(--glass); border:1px solid var(--glassBorder); border-radius:20px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.35); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    padding:16px; margin-bottom:14px; position:relative; overflow:hidden;
+  }
+  .card::before{
+    content:""; position:absolute; left:18px; top:0; width:32px; height:4px; border-radius:0 0 4px 4px;
+    background:linear-gradient(90deg,var(--accent,var(--accentA)),var(--accent2,var(--accentB)));
+  }
+  .card h2{font-size:12px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.6px;margin:0 0 14px;}
+  .row{display:grid;grid-template-columns:repeat(var(--cols,3),1fr);gap:10px;margin-bottom:10px;}
+  .row.two{--cols:2;}
+  .tile-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--sub);margin-bottom:4px;}
+  .tile-value{font-size:19px;font-weight:700;letter-spacing:-.2px;}
+  .sub-line{display:flex;justify-content:space-between;align-items:center;margin-top:2px;}
+  .sub-line .l{font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:.4px;}
+  .sub-line .v{font-size:15px;font-weight:600;}
+  .rooms .room{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--glassBorder);}
+  .rooms .room:first-child{border-top:none;}
+  .room .name{width:34px;font-size:15px;font-weight:700;}
+  .room .temp{font-size:18px;font-weight:700;flex:1;}
+  .room .hum{font-size:13px;font-weight:600;color:var(--blue);width:44px;text-align:right;}
+  .room .mm{font-size:10px;color:var(--sub);width:64px;text-align:right;}
+  .switch-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;}
+  .switch-row .l{font-size:13px;}
+  .sw{position:relative;width:46px;height:28px;border-radius:14px;background:#3a3f47;transition:background .2s;flex-shrink:0;cursor:pointer;border:none;}
+  .sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.4);}
+  .sw.on{background:var(--accentA);}
+  .sw.on::after{transform:translateX(18px);}
+  .ring{width:54px;height:54px;flex-shrink:0;}
+  .status{font-size:10px;color:var(--sub);text-align:center;margin:16px 0 4px;}
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>Übersicht</h1>
+    <div class="out" id="v-outside">–</div>
+  </div>
+
+  <div class="card" style="--accent:var(--green);--accent2:var(--blue)">
+    <h2>Fronius · Jetzt</h2>
+    <div class="row">
+      <div><div class="tile-label">Erzeugung</div><div class="tile-value" style="color:var(--green)" id="v-erzeugung">–</div></div>
+      <div><div class="tile-label">Einspeisung</div><div class="tile-value" style="color:var(--blue)" id="v-einspeisung">–</div></div>
+      <div><div class="tile-label">Verbrauch</div><div class="tile-value" style="color:var(--red)" id="v-verbrauch">–</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="--accent:var(--accentA);--accent2:var(--accentB)">
+    <h2>Sonnenbatterie · Heute</h2>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+      <div class="row two" style="flex:1;margin-right:12px;">
+        <div><div class="tile-label">Produktion</div><div class="tile-value" style="color:var(--green)" id="v-produktion">–</div></div>
+        <div><div class="tile-label">Verbrauch</div><div class="tile-value" style="color:var(--red)" id="v-verbrauchheute">–</div></div>
+      </div>
+      <svg class="ring" viewBox="0 0 54 54">
+        <circle cx="27" cy="27" r="23" fill="none" stroke="#2a2e36" stroke-width="5"/>
+        <circle id="v-soc-ring" cx="27" cy="27" r="23" fill="none" stroke="var(--green)" stroke-width="5"
+          stroke-linecap="round" stroke-dasharray="144.5" stroke-dashoffset="0" transform="rotate(-90 27 27)"/>
+        <text x="27" y="31" text-anchor="middle" font-size="12" fill="#fff" font-weight="700" id="v-soc-text">–</text>
+      </svg>
+    </div>
+    <div class="sub-line"><span class="l">Prognose heute</span><span class="v" id="v-prognose-heute">–</span></div>
+    <div class="sub-line"><span class="l">Prognose morgen</span><span class="v" style="color:var(--sub)" id="v-prognose-morgen">–</span></div>
+  </div>
+
+  <div class="card" style="--accent:var(--blue);--accent2:var(--accentB)">
+    <h2>Logarex · Zähler</h2>
+    <div class="row two">
+      <div><div class="tile-label">Einspeisung heute</div><div class="tile-value" style="color:var(--green)" id="v-logeinsp">–</div></div>
+      <div><div class="tile-label">Bezug heute</div><div class="tile-value" style="color:var(--red)" id="v-logbezug">–</div></div>
+    </div>
+    <div class="sub-line"><span class="l">Gesamt Einspeisung</span><span class="v" id="v-loggesamteinsp">–</span></div>
+    <div class="sub-line"><span class="l">Gesamt Bezug</span><span class="v" style="color:var(--sub)" id="v-loggesamtbezug">–</span></div>
+  </div>
+
+  <div style="display:flex;gap:12px;">
+    <div class="card" style="flex:1;--accent:var(--amber);--accent2:var(--amber)">
+      <h2>Gas</h2>
+      <div class="tile-value" id="v-gasheute">–</div>
+      <div class="sub-line"><span class="l">Gesamt</span><span class="v" style="font-size:11px;color:var(--sub)" id="v-gasgesamt">–</span></div>
+    </div>
+    <div class="card" style="flex:1;--accent:var(--blue);--accent2:var(--blue)">
+      <h2>Wasser</h2>
+      <div class="tile-value" id="v-wasserheute">–</div>
+      <div class="sub-line"><span class="l">Gesamt</span><span class="v" style="font-size:11px;color:var(--sub)" id="v-wassergesamt">–</span></div>
+    </div>
+  </div>
+
+  <div class="card" style="--accent:var(--amber);--accent2:var(--amber)">
+    <h2>Solarthermie</h2>
+    <div class="row">
+      <div><div class="tile-label">Kollektor</div><div class="tile-value" style="color:var(--amber)" id="v-kollektor">–</div></div>
+      <div><div class="tile-label">Speicher oben</div><div class="tile-value" id="v-speicherO">–</div></div>
+      <div><div class="tile-label">Speicher unten</div><div class="tile-value" id="v-speicherU">–</div></div>
+    </div>
+  </div>
+
+  <div class="card rooms" style="--accent:var(--green);--accent2:var(--green)">
+    <h2>Raumklima</h2>
+    <div id="rooms"></div>
+  </div>
+
+  <div class="card" style="--accent:#38bdf8;--accent2:#38bdf8">
+    <h2>Lüftung · Schnellzugriff</h2>
+    <div class="switch-row"><span class="l">Anlage</span><button class="sw" data-oid="sonoff.0.Lueftung.POWER"></button></div>
+    <div class="switch-row"><span class="l">Lüften (30m)</span><button class="sw" data-oid="0_userdata.0.Recovair.VentCmd"></button></div>
+    <div class="switch-row"><span class="l">Intensiv (15m)</span><button class="sw" data-oid="0_userdata.0.Recovair.BoostCmd"></button></div>
+  </div>
+
+  <div class="card" style="--accent:var(--sub);--accent2:var(--sub)">
+    <h2>USV</h2>
+    <div class="switch-row"><span class="l">Verbindung</span><button class="sw" data-oid="nut.0.info.connection"></button></div>
+    <div class="sub-line"><span class="l">Batterie</span><span class="v" id="v-usvbatt">–</span></div>
+  </div>
+
+  <div class="card" style="--accent:var(--amber);--accent2:var(--amber)">
+    <h2>Beschattung</h2>
+    <div class="switch-row"><span class="l">Sonnenschutz aktiv</span><button class="sw" data-oid="0_userdata.0.ShutterControl.SunProtect"></button></div>
+  </div>
+
+  <div class="status" id="status">verbinde …</div>
+
+<script>
+const API = 'http://192.168.178.133:8087';
+
+const ROOMS = [
+  { name:'DG', tOid:'shelly.1.shellyhtg3#d885ac1414f0#1.Temperature0.Celsius', hOid:'shelly.1.shellyhtg3#d885ac1414f0#1.Humidity0.Relative', mm:'statistics.0.temp.minmax.shelly.1.shellyhtg3#d885ac1414f0#1.Temperature0.Celsius' },
+  { name:'OG', tOid:'sonoff.0.HT-OG.SENSOR.AM2301.Temperature', hOid:'shelly.1.shellyhtg3#80b54e3563a0#1.Humidity0.Relative', mm:'statistics.0.temp.minmax.shelly.1.shellyhtg3#80b54e3563a0#1.Temperature0.Celsius' },
+  { name:'EG', tOid:'shelly.1.shellyhtg3#d885ac1298d8#1.Temperature0.Celsius', hOid:'shelly.1.shellyhtg3#d885ac1298d8#1.Humidity0.Relative', mm:'statistics.0.temp.minmax.shelly.1.shellyhtg3#d885ac1298d8#1.Temperature0.Celsius' },
+  { name:'KG', tOid:'sonoff.0.HT-KG.SENSOR.AM2301.Temperature', hOid:'shelly.1.shellyhtg3#d885ac141500#1.Humidity0.Relative', mm:'statistics.0.temp.minmax.shelly.1.shellyhtg3#d885ac141500#1.Temperature0.Celsius' },
+];
+
+const roomsEl = document.getElementById('rooms');
+ROOMS.forEach(r=>{
+  const div = document.createElement('div');
+  div.className = 'room';
+  div.innerHTML = `<div class="name">${r.name}</div>
+    <div class="temp" id="rt-${r.name}">–</div>
+    <div class="hum" id="rh-${r.name}">–</div>
+    <div class="mm" id="rm-${r.name}">–</div>`;
+  roomsEl.appendChild(div);
+});
+
+const SWITCH_OIDS = Array.from(document.querySelectorAll('.sw')).map(b=>b.dataset.oid);
+
+const ALL_OIDS = [
+  'ebus.1.broadcast.messages.outsidetemp.fields.temp2.value',
+  'sonnen.0.status.production','sonoff.0.Smartmeter.SENSOR.LK13BE.power','sonnen.0.status.consumption',
+  'fronius.0.inverter.1.DAY_ENERGY','0_userdata.0.Total.PowerDay','sonnen.0.status.userSoc',
+  '0_userdata.0.SolarGraph.EnergieMaxHeute','0_userdata.0.SolarGraph.EnergieMaxMorgen',
+  'statistics.0.temp.sumDelta.0_userdata.0.Smartmeter.LK13BE.total_out.day',
+  'statistics.0.temp.sumDelta.0_userdata.0.Smartmeter.LK13BE.total_in.day',
+  '0_userdata.0.Smartmeter.LK13BE.total_out','0_userdata.0.Smartmeter.LK13BE.total_in',
+  'statistics.0.temp.sumDelta.sonoff.0.GasMeter.SENSOR.COUNTER.C1.day','0_userdata.0.Total.TotalGas',
+  'statistics.0.temp.sumDelta.sonoff.0.GasMeter.SENSOR.COUNTER.C2.day','0_userdata.0.Total.TotalWater',
+  'ebus.1.sc.messages.Coll1Sensor.fields.temp.value','ebus.1.sc.messages.Storage1Sensor3.fields.temp.value','ebus.1.sc.messages.Storage2Sensor3.fields.temp.value',
+  'nut.0.battery.charge',
+  ...ROOMS.flatMap(r=>[r.tOid, r.hOid, r.mm+'.dayMax']),
+  ...SWITCH_OIDS,
+];
+
+function fmt(v, digits, unit){
+  if (v === null || v === undefined || v === '' || Number.isNaN(Number(v))) return '–';
+  const n = Number(v);
+  return n.toLocaleString('de-DE', {minimumFractionDigits:digits, maximumFractionDigits:digits}) + (unit?(' '+unit):'');
+}
+
+function set(id, text){ const el = document.getElementById(id); if (el) el.textContent = text; }
+
+async function fetchAll(){
+  const results = {};
+  await Promise.all(ALL_OIDS.map(async id => {
+    try{
+      const res = await fetch(`${API}/getPlainValue/${encodeURIComponent(id)}`);
+      results[id] = await res.text();
+    }catch(e){ results[id] = null; }
+  }));
+  return results;
+}
+
+function render(v){
+  set('v-outside', fmt(v['ebus.1.broadcast.messages.outsidetemp.fields.temp2.value'],1,'°C'));
+  set('v-erzeugung', fmt(v['sonnen.0.status.production'],0,'W'));
+  set('v-einspeisung', fmt(v['sonoff.0.Smartmeter.SENSOR.LK13BE.power'],0,'W'));
+  set('v-verbrauch', fmt(v['sonnen.0.status.consumption'],0,'W'));
+
+  set('v-produktion', fmt(v['fronius.0.inverter.1.DAY_ENERGY'],2,'kWh'));
+  set('v-verbrauchheute', fmt(v['0_userdata.0.Total.PowerDay'],2,'kWh'));
+  set('v-prognose-heute', fmt(v['0_userdata.0.SolarGraph.EnergieMaxHeute'],1,'kWh'));
+  set('v-prognose-morgen', fmt(v['0_userdata.0.SolarGraph.EnergieMaxMorgen'],1,'kWh'));
+  const soc = Number(v['sonnen.0.status.userSoc']);
+  if (!Number.isNaN(soc)){
+    set('v-soc-text', Math.round(soc)+'%');
+    const circumference = 2*Math.PI*23;
+    document.getElementById('v-soc-ring').style.strokeDasharray = circumference;
+    document.getElementById('v-soc-ring').style.strokeDashoffset = circumference * (1 - soc/100);
+  }
+
+  set('v-logeinsp', fmt(v['statistics.0.temp.sumDelta.0_userdata.0.Smartmeter.LK13BE.total_out.day'],2,'kWh'));
+  set('v-logbezug', fmt(v['statistics.0.temp.sumDelta.0_userdata.0.Smartmeter.LK13BE.total_in.day'],2,'kWh'));
+  set('v-loggesamteinsp', fmt(v['0_userdata.0.Smartmeter.LK13BE.total_out'],0,'kWh'));
+  set('v-loggesamtbezug', fmt(v['0_userdata.0.Smartmeter.LK13BE.total_in'],0,'kWh'));
+
+  set('v-gasheute', fmt(v['statistics.0.temp.sumDelta.sonoff.0.GasMeter.SENSOR.COUNTER.C1.day'],3,'m³'));
+  set('v-gasgesamt', fmt(v['0_userdata.0.Total.TotalGas'],1,'m³ ges.'));
+  set('v-wasserheute', fmt(v['statistics.0.temp.sumDelta.sonoff.0.GasMeter.SENSOR.COUNTER.C2.day'],3,'m³'));
+  set('v-wassergesamt', fmt(v['0_userdata.0.Total.TotalWater'],1,'m³ ges.'));
+
+  set('v-kollektor', fmt(v['ebus.1.sc.messages.Coll1Sensor.fields.temp.value'],1,'°C'));
+  set('v-speicherO', fmt(v['ebus.1.sc.messages.Storage1Sensor3.fields.temp.value'],1,'°C'));
+  set('v-speicherU', fmt(v['ebus.1.sc.messages.Storage2Sensor3.fields.temp.value'],1,'°C'));
+
+  ROOMS.forEach(r=>{
+    set('rt-'+r.name, fmt(v[r.tOid],1,'°C'));
+    set('rh-'+r.name, fmt(v[r.hOid],0,'%'));
+    set('rm-'+r.name, '↑ '+fmt(v[r.mm+'.dayMax'],1,'°C'));
+  });
+
+  set('v-usvbatt', fmt(v['nut.0.battery.charge'],0,'%'));
+
+  document.querySelectorAll('.sw').forEach(btn=>{
+    const val = v[btn.dataset.oid];
+    const on = val === 'true' || val === '1';
+    btn.classList.toggle('on', on);
+  });
+}
+
+let lastValues = {};
+async function tick(){
+  try{
+    lastValues = await fetchAll();
+    render(lastValues);
+    document.getElementById('status').textContent = 'aktualisiert ' + new Date().toLocaleTimeString('de-DE');
+  }catch(e){
+    document.getElementById('status').textContent = 'Verbindung zu simple-api fehlgeschlagen: ' + e.message;
+  }
+}
+
+document.querySelectorAll('.sw').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const oid = btn.dataset.oid;
+    const current = lastValues[oid] === 'true' || lastValues[oid] === '1';
+    const next = !current;
+    btn.classList.toggle('on', next); // optimistic UI
+    try{
+      await fetch(`${API}/set/${encodeURIComponent(oid)}?value=${next}`);
+    }catch(e){ /* revert on next poll */ }
+  });
+});
+
+tick();
+setInterval(tick, 4000);
+</script>
+</body>
+</html>

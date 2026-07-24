@@ -2584,6 +2584,64 @@
     "name": "index",
     "filterList": []
   },
+  "indexHtml": {
+    "settings": {
+      "style": {
+        "background-color": "#0b0c12",
+        "background": "radial-gradient(1200px 600px at 20% -10%, #14171f, #0b0c12 60%)",
+        "overflowY": "auto",
+        "overflowX": "hidden",
+        "-webkit-overflow-scrolling": "touch"
+      },
+      "theme": "redmond",
+      "sizex": "375",
+      "sizey": "812",
+      "gridSize": "10",
+      "useBackground": false,
+      "snapType": 0
+    },
+    "widgets": {
+      "e00001": {
+        "tpl": "tplIFrame",
+        "data": {
+          "src": "REPLACE_WITH_YOUR_HOSTED_URL/uebersicht.html",
+          "seamless": "true",
+          "refreshInterval": "0"
+        },
+        "style": {
+          "left": "0px",
+          "top": "0px",
+          "width": "100%",
+          "height": "100%",
+          "border": "none",
+          "position": "fixed",
+          "z-index": 1
+        },
+        "widgetSet": "basic"
+      },
+      "e00002": {
+        "tpl": "tplContainerView",
+        "data": {
+          "contains_view": "navigation"
+        },
+        "style": {
+          "left": "50%",
+          "top": "auto",
+          "width": "100%",
+          "height": "96px",
+          "background": "transparent",
+          "position": "fixed",
+          "bottom": "0px",
+          "transform": "translateX(-50%)",
+          "max-width": "375px",
+          "z-index": 1000
+        },
+        "widgetSet": "basic"
+      }
+    },
+    "name": "indexHtml",
+    "filterList": []
+  },
   "viewHeizung": {
     "settings": {
       "style": {
