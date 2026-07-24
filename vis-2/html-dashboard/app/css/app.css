@@ -1,0 +1,107 @@
+:root{
+  --bg1:#0b0c12; --bg2:#14171f;
+  --glass:rgba(255,255,255,0.055); --glassBorder:rgba(255,255,255,0.09);
+  --text:#f2f4f8; --sub:#8b93a6;
+  --accentA:#7c6cff; --accentB:#4fd1ff;
+  --green:#34d399; --red:#fb7185; --blue:#60a5fa; --amber:#fbbf24;
+  --nav-h: 96px;
+}
+*{box-sizing:border-box; min-width:0;}
+html,body{margin:0;padding:0;background:var(--bg1);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased; height:100%;}
+body{
+  background:radial-gradient(1200px 600px at 20% -10%, var(--bg2), var(--bg1) 60%);
+  overflow-x:hidden;
+}
+.app{width:100%; max-width:520px; margin:0 auto; position:relative; min-height:100vh; overflow-x:hidden;}
+
+/* ---------- pages ---------- */
+.page{display:none; width:100%; overflow-x:hidden; padding:calc(env(safe-area-inset-top) + 12px) 16px calc(env(safe-area-inset-bottom) + var(--nav-h) + 24px);}
+.page.active{display:block;}
+
+.header{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.header .chip{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--accentA),var(--accentB));
+  display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(124,108,255,.35); flex-shrink:0;}
+.header .chip svg{width:26px;height:26px;}
+.header h1{font-size:22px;font-weight:700;margin:0;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.header .out{font-size:22px;font-weight:700;white-space:nowrap;}
+
+/* ---------- cards ---------- */
+.card{
+  background:var(--glass); border:1px solid var(--glassBorder); border-radius:20px;
+  box-shadow:0 8px 24px rgba(0,0,0,.35); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  padding:16px; margin-bottom:14px; position:relative; overflow:hidden;
+}
+.card::before{content:"";position:absolute;left:18px;top:0;width:32px;height:4px;border-radius:0 0 4px 4px;
+  background:linear-gradient(90deg,var(--accent,var(--accentA)),var(--accent2,var(--accentB)));}
+.card h2{font-size:12px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.6px;margin:0 0 14px;}
+.card-row{display:flex; gap:12px;}
+.card-row .card{flex:1; min-width:0;}
+
+.row{display:grid;gap:10px;margin-bottom:10px;min-width:0;}
+.row.c3{grid-template-columns:repeat(3,minmax(0,1fr));}
+.row.c2{grid-template-columns:repeat(2,minmax(0,1fr));}
+.row>div{min-width:0;}
+.tile-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--sub);margin-bottom:4px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.tile-value{font-size:19px;font-weight:700;letter-spacing:-.2px;}
+.tile-value.lg{font-size:28px;}
+.sub-line{display:flex;justify-content:space-between;align-items:center;margin-top:2px;padding:4px 0;}
+.sub-line .l{font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:.4px;}
+.sub-line .v{font-size:15px;font-weight:600;}
+
+/* ---------- rooms ---------- */
+.room{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--glassBorder);}
+.room:first-child{border-top:none;}
+.room .name{width:34px;font-size:15px;font-weight:700;}
+.room .temp{font-size:18px;font-weight:700;flex:1;}
+.room .hum{font-size:13px;font-weight:600;color:var(--blue);width:44px;text-align:right;}
+.room .mm{font-size:10px;color:var(--sub);width:68px;text-align:right;}
+
+/* ---------- switches & sliders ---------- */
+.switch-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;}
+.switch-row .l{font-size:13px;}
+.sw{position:relative;width:46px;height:28px;border-radius:14px;background:#3a3f47;transition:background .2s;flex-shrink:0;cursor:pointer;border:none;-webkit-tap-highlight-color:transparent;}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.4);}
+.sw.on{background:var(--accentA);}
+.sw.on::after{transform:translateX(18px);}
+.slider-row{padding:10px 0;}
+.slider-row .l{font-size:13px;display:flex;justify-content:space-between;margin-bottom:8px;}
+.slider-row input[type=range]{width:100%; accent-color:var(--accentA);}
+
+/* ---------- ring gauge ---------- */
+.ring{width:54px;height:54px;flex-shrink:0;}
+.ring text{fill:#fff;font-size:12px;font-weight:700;font-family:inherit;}
+
+/* ---------- iframes (Grafana / Energiefluss) ---------- */
+.iframe-wrap{border-radius:20px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.35);margin-bottom:14px;}
+.iframe-wrap iframe{width:100%;border:none;display:block;}
+
+/* ---------- table (Statistik) ---------- */
+table.stat{width:100%;border-collapse:collapse;table-layout:fixed;}
+table.stat th,table.stat td{width:14.4%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+table.stat th:first-child,table.stat td:first-child{width:28%;}
+table.stat th{font-size:9px;color:var(--sub);text-align:right;font-weight:600;padding-bottom:8px;}
+table.stat th:first-child{text-align:left;}
+table.stat td{font-size:10px;text-align:right;padding:5px 0;}
+table.stat td:first-child{text-align:left;font-size:12px;font-weight:600;white-space:normal;}
+table.stat tr.total td{color:var(--sub);font-size:10px;padding-top:0;padding-bottom:10px;}
+
+/* ---------- status line ---------- */
+.status{font-size:10px;color:var(--sub);text-align:center;margin:8px 0 4px;}
+
+/* ---------- bottom nav (fixed, real CSS, no vis needed) ---------- */
+nav.tabbar{
+  position:fixed; left:50%; transform:translateX(-50%); bottom:calc(env(safe-area-inset-bottom) + 6px);
+  width:calc(100% - 20px); max-width:500px;
+  background:rgba(20,23,31,0.75); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+  border:1px solid var(--glassBorder); border-radius:26px; box-shadow:0 10px 30px rgba(0,0,0,.45);
+  display:flex; padding:10px 4px; z-index:1000;
+}
+nav.tabbar a{flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none; color:var(--sub);
+  -webkit-tap-highlight-color:transparent;}
+nav.tabbar a .chip{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform .15s;}
+nav.tabbar a .chip svg{width:20px;height:20px;}
+nav.tabbar a span{font-size:10px;font-weight:700;color:#c7ccd6;}
+nav.tabbar a.active .chip{transform:translateY(-2px);}
