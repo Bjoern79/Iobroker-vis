@@ -142,14 +142,14 @@ body{
 .badge-bool{background:rgba(251,113,133,.15);color:var(--red);}
 .badge-bool.on{background:rgba(52,211,153,.16);color:var(--green);}
 
-/* ---------- raw HTML blob from an old vis widget (SonnenLaden etc.) ---------- */
-.blob-card{margin-top:12px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.035);
+/* ---------- raw HTML blob from an old vis widget (SonnenLaden etc.) ----------
+   rendered inside a sandboxed iframe (see htmlBlob()/poll() in app.js) so the
+   fragment's own markup/CSS gets its full designed width and never collides
+   with our page's classes; height is auto-set to the fragment's content. */
+.blob-card{margin-top:12px;padding:10px;border-radius:16px;background:rgba(255,255,255,.035);
   border:1px solid var(--glassBorder);}
 .blob-card .t-label{margin-bottom:8px;}
-.blob-content{font-size:12.5px;color:var(--sub);line-height:1.55;overflow-x:auto;}
-.blob-content table{width:100%;border-collapse:collapse;font-size:12px;}
-.blob-content td, .blob-content th{padding:4px 6px;border-bottom:1px solid var(--glassBorder);text-align:left;}
-.blob-content a{color:var(--blue);}
+.blob-frame{width:100%;border:0;display:block;background:transparent;}
 
 /* ---------- ring gauge (generic small) ---------- */
 .ring{width:54px;height:54px;flex-shrink:0;}
@@ -180,6 +180,7 @@ body{
 .lb-bar-track{position:relative;height:8px;border-radius:4px;background:rgba(255,255,255,.06);flex:2;overflow:hidden;}
 .lb-bar-fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,var(--violet),var(--accentB));}
 .lb-val{width:64px;text-align:right;font-size:12px;font-weight:700;}
+.lb-val .tile-value{font-size:12px;font-weight:700;}
 
 /* ---------- status line ---------- */
 .status{font-size:9.5px;color:var(--sub2);text-align:center;margin:10px 0 4px;}

@@ -14,6 +14,7 @@ const GLYPHS = {
   grid: `<path d="M22 12v14M42 12v14" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><rect x="17" y="26" width="30" height="17" rx="4" fill="none" stroke="currentColor" stroke-width="4"/><path d="M32 43v9" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>`,
   drop: `<path d="M32 12c9 12 15 20 15 28a15 15 0 1 1-30 0c0-8 6-16 15-28z" fill="currentColor"/>`,
   gas: `<circle cx="32" cy="34" r="16" fill="none" stroke="currentColor" stroke-width="4"/><path d="M32 22v-8M24 24l-5-6M40 24l5-6" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>`,
+  exchange: `<path d="M12 24h34l-9-9" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M52 40H18l9 9" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`,
 };
 function icon(kind, size){
   const s = size||24;
@@ -55,25 +56,33 @@ function card(title, accent, inner, accent2){
   return `<div class="card" style="--accent:${accent};--accent2:${accent2||accent}"><h2>${title}</h2>${inner}</div>`;
 }
 function switchRow(label, oid){ return `<div class="switch-row"><span class="l">${label}</span><button class="sw" data-oid="${oid}"></button></div>`; }
-// read-only text/enum pill, e.g. "Betriebsart: Heizen"
-function statusBadge(oid, opts={}){
-  const { digits=0, unit='' } = opts;
-  return `<span class="badge" data-oid="${oid}" data-digits="${digits}" data-unit="${unit}">–</span>`;
-}
 // boolean-driven pill with its own on/off label + color (not a toggle — read-only status)
 function boolBadge(oid, onLabel, offLabel){
   return `<span class="badge badge-bool" data-oid="${oid}" data-on="${onLabel||'Aktiv'}" data-off="${offLabel||'Inaktiv'}">–</span>`;
 }
 function boolBadgeRow(label, oid, onLabel, offLabel){ return `<div class="switch-row"><span class="l">${label}</span>${boolBadge(oid,onLabel,offLabel)}</div>`; }
-// pre-rendered HTML fragment straight from an ioBroker state (e.g. an old vis widget's html-blob state)
+// pre-rendered HTML fragment straight from an ioBroker state (e.g. an old vis widget's html-blob
+// state). Rendered inside a sandboxed same-origin iframe (srcdoc) so the fragment's own markup/CSS
+// never collides with our page's classes and always gets its full designed width to lay out in —
+// see poll() for the srcdoc + auto-height logic.
 function htmlBlob(oid, label){
-  return `<div class="blob-card"><div class="t-label">${label}</div><div class="blob-content" data-oid-html="${oid}"></div></div>`;
+  return `<div class="blob-card"><div class="t-label">${label}</div><iframe class="blob-frame" data-oid-html="${oid}" scrolling="no" frameborder="0"></iframe></div>`;
 }
 function sliderRow(label, oid, min=0, max=100){
   return `<div class="slider-row"><div class="l"><span>${label}</span><span data-oid="${oid}" data-digits="0" data-unit="%">–</span></div>
     <input type="range" min="${min}" max="${max}" step="1" data-slider-oid="${oid}"></div>`;
 }
 function iframeBlock(src, height){ return `<div class="iframe-wrap"><iframe src="${src}" height="${height}" loading="lazy"></iframe></div>`; }
+// Grafana panels: baked-in login (kiosk display, no separate auth prompt) + &kiosk to hide the
+// Grafana top/side nav chrome so only the panel itself shows.
+const GRAFANA_USER = 'admin', GRAFANA_PASS = 'Batman1!';
+function grafanaFrame(src, height){
+  const u = new URL(src);
+  u.username = GRAFANA_USER;
+  u.password = GRAFANA_PASS;
+  u.searchParams.set('kiosk','');
+  return iframeBlock(u.toString(), height);
+}
 function header(kind, title, outsideOid){
   return `<div class="header"><div><div class="eyebrow">Haus-Dashboard</div><h1>${title}</h1></div>${outsideOid?
     `<div class="out">Draußen<b>${val(outsideOid,{digits:1,unit:'°'})}</b></div>`:''}</div>`;
@@ -126,20 +135,59 @@ function flowHero(){
     <path class="flow-line" style="stroke:#60a5fa;animation-delay:.5s" d="M84,73 L55,58"/>`;
   return flowDiagram(nodes, lines, {title:'Energiefluss · jetzt'});
 }
-// airflow diagram for Lüftung: Frischluft (outside) + Abluft (extract) through the
-// heat-exchanger, out as Zuluft (supply) / Fortluft (exhaust)
+// airflow diagram for Lüftung: two independent flows crossing through the heat-exchanger —
+// Frischluft (outside, top-left) -> HX -> Zuluft (supply, top-right); Abluft (room extract,
+// bottom-right) -> HX -> Fortluft (exhaust, bottom-left). Bespoke layout (not the generic
+// hub-and-spoke flowDiagram) since it needs 4 outer nodes plus a purely decorative center icon.
 function airFlowDiagram(){
+  const outer = [
+    { x:15, y:24, bg:'linear-gradient(135deg,#60a5fa,#3b82f6)', label:'Frischluft', kind:'wind', oid:'ebus.0.recov.messages.TempOutsideAir.fields.temp.value', unit:'°', digits:1 },
+    { x:15, y:76, bg:'linear-gradient(135deg,#fb7185,#f43f5e)', label:'Fortluft', kind:'wind', oid:'ebus.0.recov.messages.TempOutgoingAir.fields.temp.value', unit:'°', digits:1 },
+    { x:85, y:24, bg:'linear-gradient(135deg,#34d399,#10b981)', label:'Zuluft', kind:'wind', oid:'ebus.0.recov.messages.TempInletAir.fields.temp.value', unit:'°', digits:1 },
+    { x:85, y:76, bg:'linear-gradient(135deg,#fbbf24,#f59e0b)', label:'Abluft', kind:'wind', oid:'ebus.0.recov.messages.TempWasteAir.fields.temp.value', unit:'°', digits:1 },
+  ];
+  // elbow paths (not straight diagonals): each stays in its own node's column until clear of the
+  // center label band, only crossing horizontally at y=44 — a straight diagonal here would clip
+  // through the "Wärmetauscher" label because preserveAspectRatio="none" stretches x far more
+  // than y in this wide/short container.
+  const lines = `
+    <path class="flow-line" style="stroke:#60a5fa" d="M19,30 L19,44 L44,44"/>
+    <path class="flow-line" style="stroke:#34d399;animation-delay:.25s" d="M56,44 L81,44 L81,30"/>
+    <path class="flow-line" style="stroke:#fbbf24;animation-delay:.4s" d="M81,70 L81,44 L56,44"/>
+    <path class="flow-line" style="stroke:#fb7185;animation-delay:.65s" d="M44,44 L19,44 L19,70"/>`;
+  const overlays = outer.map(n=>`
+    <div style="position:absolute;left:${n.x}%;top:${n.y}%;transform:translate(-50%,-50%);text-align:center;width:74px;">
+      <div style="width:38px;height:38px;border-radius:50%;background:${n.bg};display:flex;align-items:center;justify-content:center;margin:0 auto 4px;box-shadow:0 4px 14px rgba(0,0,0,.45);color:#fff;">${icon(n.kind,19)}</div>
+      <div class="flow-label">${n.label}</div>
+      <div class="flow-value" data-oid="${n.oid}" data-digits="${n.digits}" data-unit="${n.unit}">–</div>
+    </div>`).join('') +
+    `<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:80px;">
+      <div style="width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#7c6cff,#4fd1ff);display:flex;align-items:center;justify-content:center;margin:0 auto 4px;box-shadow:0 4px 14px rgba(0,0,0,.45);color:#fff;">${icon('exchange',20)}</div>
+      <div class="flow-label">Wärmetauscher</div>
+    </div>`;
+  return `<div class="bento" style="margin-bottom:12px">
+    <div class="t span2 glass flow-tile">
+      <div class="t-label">Luftströme · jetzt</div>
+      <div class="flow-wrap">
+        <svg class="flow-svg" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg>
+        ${overlays}
+      </div>
+    </div>
+  </div>`;
+}
+// solar-thermal flow diagram: Kollektor (heat source) -> Pumpe (circulates) -> Speicher oben/unten
+function solarFlowDiagram(){
   const nodes = [
-    { x:50, y:11, bg:'linear-gradient(135deg,#60a5fa,#3b82f6)', label:'Frischluft', kind:'wind', oid:'ebus.0.recov.messages.TempOutsideAir.fields.temp.value', unit:'°', digits:1 },
-    { x:13, y:76, bg:'linear-gradient(135deg,#34d399,#10b981)', label:'Zuluft', kind:'home', oid:'ebus.0.recov.messages.TempInletAir.fields.temp.value', unit:'°', digits:1 },
-    { x:87, y:76, bg:'linear-gradient(135deg,#fb7185,#f43f5e)', label:'Fortluft', kind:'wind', oid:'ebus.0.recov.messages.TempOutgoingAir.fields.temp.value', unit:'°', digits:1 },
-    { x:50, y:56, bg:'linear-gradient(135deg,#7c6cff,#4fd1ff)', label:'Abluft', kind:'grid', oid:'ebus.0.recov.messages.TempWasteAir.fields.temp.value', unit:'°', digits:1 },
+    { x:50, y:11, bg:'linear-gradient(135deg,#fb923c,#f97316)', label:'Kollektor', kind:'sun', oid:'ebus.1.sc.messages.Coll1Sensor.fields.temp.value', unit:'°', digits:1 },
+    { x:13, y:76, bg:'linear-gradient(135deg,#fbbf24,#f59e0b)', label:'Speicher oben', kind:'thermo', oid:'ebus.1.sc.messages.Storage1Sensor3.fields.temp.value', unit:'°', digits:1 },
+    { x:87, y:76, bg:'linear-gradient(135deg,#60a5fa,#3b82f6)', label:'Speicher unten', kind:'thermo', oid:'ebus.1.sc.messages.Storage2Sensor3.fields.temp.value', unit:'°', digits:1 },
+    { x:50, y:56, bg:'linear-gradient(135deg,#7c6cff,#4fd1ff)', label:'Pumpe', kind:'exchange', oid:'ebus.1.sc.messages.SolCollPumpED1.fields.percent0.value', unit:'%', digits:0 },
   ];
   const lines = `
-    <path class="flow-line" style="stroke:#60a5fa" d="M50,14 L50,53"/>
-    <path class="flow-line" style="stroke:#34d399;animation-delay:.25s" d="M45,58 L16,73"/>
-    <path class="flow-line" style="stroke:#fb7185;animation-delay:.5s" d="M55,58 L84,73"/>`;
-  return `<div class="bento" style="margin-bottom:12px">${flowDiagram(nodes, lines, {title:'Luftströme · jetzt'})}</div>`;
+    <path class="flow-line" style="stroke:#fb923c" d="M50,14 L50,53"/>
+    <path class="flow-line" style="stroke:#fbbf24;animation-delay:.25s" d="M16,73 L45,58"/>
+    <path class="flow-line" style="stroke:#60a5fa;animation-delay:.5s" d="M84,73 L55,58"/>`;
+  return `<div class="bento" style="margin-bottom:12px">${flowDiagram(nodes, lines, {title:'Solarkreislauf · jetzt'})}</div>`;
 }
 function battTile(){
   return `<div class="t glass batt-tile">
@@ -248,7 +296,7 @@ const PAGES = {
         ${battTile()}
         ${climateTile(ROOMS)}
         ${miniStatTile('Gas heute','statistics.0.temp.sumDelta.sonoff.0.GasMeter.SENSOR.COUNTER.C1.day','m³',3,'gas','linear-gradient(135deg,#fbbf24,#f59e0b)')}
-        ${miniStatTile('Wasser heute','statistics.0.temp.sumDelta.sonoff.0.GasMeter.SENSOR.COUNTER.C2.day','m³',3,'drop','linear-gradient(135deg,#60a5fa,#3b82f6)')}
+        ${miniStatTile('Wasser heute','statistics.0.temp.sumDelta.sonoff.0.GasMeter.SENSOR.COUNTER.C2.day','L',0,'drop','linear-gradient(135deg,#60a5fa,#3b82f6)')}
       </div>
       <div class="glass" style="padding:16px;margin-top:12px;">
         <div class="t-label">Schnellzugriff</div>
@@ -286,29 +334,22 @@ const PAGES = {
           ${ringGauge('ebus.1.mc.messages.FlowTemp.fields.temp.value',{size:104,min:20,max:60,unit:'°',color:'var(--blue)',strokeWidth:9,textSize:22})}
           <div class="batt-sub">Soll ${val('ebus.1.mc.messages.FlowTempDesired.fields.temp1.value',{digits:1,unit:'°'})}</div>
         </div>
-        ${miniStatTile('Wasserdruck','ebus.1.bai.messages.WaterPressure.fields.press.value','bar',2,'drop','linear-gradient(135deg,#60a5fa,#3b82f6)')}
-        ${miniStatTile('Abgastemp.','km200.0.system.sensors.temperatures.chimney','°',1,'flame','linear-gradient(135deg,#fbbf24,#f59e0b)')}
       </div>` +
-      card('Wärmeerzeuger (KM200)','#f97316',
-        `<div class="switch-row"><span class="l">Betriebsart</span>${statusBadge('km200.0.heatingCircuits.hc1.operationMode')}</div>` +
-        `<div class="switch-row"><span class="l">Status</span>${statusBadge('km200.0.heatingCircuits.hc1.status')}</div>` +
-        `<div class="switch-row"><span class="l">Mischer-Status</span>${statusBadge('ebus.1.mc.messages.Status.fields.3.value')}</div>` +
-        subLine('Leistung','km200.0.system.heatSources.hs1.actualPower',{digits:0,unit:'W'})) +
       card('Solarspeicher (Warmwasser)','var(--amber)', row(2,[
         tile('ebus.1.sc.messages.Storage1Sensor3.fields.temp.value','Oben',{digits:1,unit:'°'}),
         tile('ebus.1.sc.messages.Storage2Sensor3.fields.temp.value','Unten',{digits:1,unit:'°'}),
       ])) +
       card('Gaszähler','#f97316',
         row(2,[
-          tile('0_userdata.0.Total.TotalGasLasDiff','Verbrauch (Diff)',{digits:3,unit:'m³'}),
-          tile('0_userdata.0.Total.TotalGas','Zählerstand',{digits:2,unit:'m³',color:'var(--sub)'}),
+          tile('0_userdata.0.Total.TotalGasLasDiff','Verbrauch (Diff)',{digits:0,unit:'m³'}),
+          tile('0_userdata.0.Total.TotalGas','Zählerstand',{digits:0,unit:'m³',color:'var(--sub)'}),
         ]) +
         row(3,[
-          tile('0_userdata.0.Total.TotalGasActual','Verbrauch %',{digits:1,unit:'%'}),
-          tile('0_userdata.0.Total.TotalGasProz','Ø-Vergleich',{digits:1,unit:'%'}),
-          tile('0_userdata.0.Total.TotalGasLast','Vorjahr',{digits:2,unit:'m³',color:'var(--sub)'}),
+          tile('0_userdata.0.Total.TotalGasActual','Verbrauch %',{digits:0,unit:'%'}),
+          tile('0_userdata.0.Total.TotalGasProz','Ø-Vergleich',{digits:0,unit:'%'}),
+          tile('0_userdata.0.Total.TotalGasLast','Vorjahr',{digits:0,unit:'m³',color:'var(--sub)'}),
         ])) +
-      iframeBlock('http://192.168.178.133:3000/d/pLVPM4ZRz/vaillant-heizung?orgId=1&refresh=10s', 280);
+      grafanaFrame('http://192.168.178.133:3000/d/pLVPM4ZRz/vaillant-heizung?orgId=1&refresh=10s', 280);
   },
 
   pv(){
@@ -330,7 +371,7 @@ const PAGES = {
           ${actionChip('Reduktion 2','sonnen.0.ios.DO_14')}
         </div>
       </div>` +
-      iframeBlock('http://192.168.178.133:3000/d/nmigVjjWz/photovoltaik?orgId=1&refresh=10s', 280);
+      grafanaFrame('http://192.168.178.133:3000/d/nmigVjjWz/photovoltaik?orgId=1&refresh=10s', 280);
   },
 
   lueftung(){
@@ -352,16 +393,12 @@ const PAGES = {
         </div>
         ${sliderRow('Ziel Feuchtigkeit','0_userdata.0.Recovair.SetpointRecov',0,100)}
         ${sliderRow('Nachlaufzeit','0_userdata.0.Recovair.DelayTime',0,60)}
-      </div>` +
-      card('Klima','var(--green)',
-        subLine('Außen · Temp','openweathermap.0.forecast.current.temperature',{digits:1,unit:'°'}) +
-        subLine('Außen · abs. Feuchte','0_userdata.0.absFeuchte.absFeuchteAussen',{digits:1,unit:'g/m³',color:'var(--blue)'}) +
-        subLine('Innen · Temp','mqtt.0.ESP09.Keller.Temperature',{digits:1,unit:'°'}) +
-        subLine('Innen · abs. Feuchte','0_userdata.0.absFeuchte.absFeuchteInnen',{digits:1,unit:'g/m³',color:'var(--blue)'}));
+      </div>`;
   },
 
   solar(){
     return header('sun','Solaranlage','ebus.1.sc.messages.Coll1Sensor.fields.temp.value') +
+      solarFlowDiagram() +
       `<div class="bento" style="margin-bottom:12px">
         <div class="t glass" style="display:flex;flex-direction:column;align-items:center;">
           <div class="t-label" style="align-self:flex-start;">Kollektor</div>
@@ -395,7 +432,7 @@ const PAGES = {
           tile('0_userdata.0.Solaranlage.HystereseRampe','Hyst.-Rampe',{digits:1,unit:'°'}),
           tile('0_userdata.0.Solaranlage.Hysterese','Hysterese',{digits:1,unit:'°'}),
         ])) +
-      iframeBlock('http://192.168.178.133:3000/d/CTus57WRk/vaillant-solaranlage?orgId=1&refresh=10s', 280);
+      grafanaFrame('http://192.168.178.133:3000/d/CTus57WRk/vaillant-solaranlage?orgId=1&refresh=10s', 280);
   },
 
   // ---- KLIMA: horizontal room carousel instead of list ----
@@ -403,15 +440,11 @@ const PAGES = {
     return header('thermo','Temperatur','openweathermap.0.forecast.current.temperature') +
       `<div class="t-label" style="margin:4px 0 8px 2px;">Räume</div>
       <div class="room-scroller">${ROOMS.map(r=>roomCard(r.name,r.t,r.h,r.mm)).join('')}</div>` +
-      card('Außen / Innen · abs. Feuchte','var(--blue)',
-        subLine('Außen','openweathermap.0.forecast.current.temperature',{digits:1,unit:'°'}) +
-        subLine('Außen · abs. Feuchte','0_userdata.0.absFeuchte.absFeuchteAussen',{digits:1,unit:'g/m³',color:'var(--blue)'}) +
-        subLine('Innen · abs. Feuchte','0_userdata.0.absFeuchte.absFeuchteInnen',{digits:1,unit:'g/m³',color:'var(--blue)'})) +
       card('Steuerung','var(--green)',
         switchRow('Lüften (Feuchte-Trigger)','0_userdata.0.absFeuchte.Lueften') +
         switchRow('Multimedia','sonoff.0.Multimedia.POWER')) +
-      iframeBlock('http://192.168.178.133:3000/d/-_mGMnzgz/raumtemperatur?orgId=1&from=now-1h&to=now&refresh=10s', 220) +
-      iframeBlock('http://192.168.178.133:3000/d/07b2e3d8-3c6b-4c93-9213-3afbc67483d5/humidity?orgId=1&from=now-1h&to=now&refresh=10s', 220);
+      grafanaFrame('http://192.168.178.133:3000/d/-_mGMnzgz/raumtemperatur?orgId=1&from=now-1h&to=now&refresh=10s', 220) +
+      grafanaFrame('http://192.168.178.133:3000/d/07b2e3d8-3c6b-4c93-9213-3afbc67483d5/humidity?orgId=1&from=now-1h&to=now&refresh=10s', 220);
   },
 
   // ---- STATISTIK: real bar charts + leaderboard instead of tables ----
@@ -501,7 +534,24 @@ async function poll(){
 
   htmlNodes.forEach(n=>{
     const raw = values[n.dataset.oidHtml];
-    n.innerHTML = (raw===null || raw===undefined || raw==='null') ? '' : raw;
+    const html = (raw===null || raw===undefined || raw==='null') ? '' : raw;
+    if (n._lastHtml === html) return;
+    n._lastHtml = html;
+    n.srcdoc = `<!doctype html><html><head><meta charset="utf-8"><base target="_blank"><style>
+      *{box-sizing:border-box;}
+      html,body{margin:0;padding:0;background:transparent;color:#e0e6ed;
+        font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;font-size:12px;}
+      body{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;}
+      body::-webkit-scrollbar{height:4px;}
+    </style></head><body>${html}</body></html>`;
+    n.onload = ()=>{
+      try{
+        // collapse first: scrollHeight of a short doc otherwise reports the iframe's *old*
+        // (default 150px) viewport height instead of the content's true, possibly-smaller height
+        n.style.height = '0px';
+        n.style.height = Math.max(20, n.contentDocument.documentElement.scrollHeight) + 'px';
+      }catch(e){}
+    };
   });
 
   rings.forEach(ringEl=>{

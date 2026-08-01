@@ -47,3 +47,11 @@ Tab-Bar unten (reines CSS, kein vis-Widget), und Live-Daten über den
 - CORS: Falls der Browser Anfragen an `simple-api` blockiert, muss dort
   in den Adapter-Einstellungen "Access-Control-Allow-Origin" (`*` oder die
   Origin der App) aktiviert sein.
+- **Grafana-Zugangsdaten liegen im Klartext in `app.js`** (`GRAFANA_USER`/
+  `GRAFANA_PASS`, aktuell `admin`/`Batman1!`), damit die eingebetteten Panels
+  ohne Login-Prompt laden und im Kiosk-Modus (`&kiosk`, kein Grafana-Menü)
+  erscheinen. Das ist für ein rein lokal im Heimnetz erreichbares Dashboard
+  vertretbar, aber die Datei ist damit **kein Ort für ein geteiltes/öffentlich
+  erreichbares Deployment** — bei Bedarf stattdessen einen eigenen
+  Read-only-Grafana-Nutzer mit eingeschränkten Dashboard-Rechten anlegen,
+  statt `admin`.

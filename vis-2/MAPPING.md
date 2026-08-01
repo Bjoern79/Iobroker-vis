@@ -56,17 +56,19 @@ außer wo unten explizit als Annahme markiert.
 - Fronius Jetzt: `sonnen.0.status.production` / `sonoff.0.Smartmeter.SENSOR.LK13BE.power` / `sonnen.0.status.consumption`
 - Sonnenbatterie: `sonnen.0.status.userSoc`, `fronius.0.inverter.1.DAY_ENERGY`, `0_userdata.0.Total.PowerDay`, `0_userdata.0.SolarGraph.EnergieMaxHeute/Morgen`
 - Logarex: `statistics.0.temp.sumDelta.0_userdata.0.Smartmeter.LK13BE.total_out/in.day`, `0_userdata.0.Smartmeter.LK13BE.total_out/in`
-- Gas/Wasser: `statistics.0.temp.sumDelta.sonoff.0.GasMeter.SENSOR.COUNTER.C1/C2.day`, `0_userdata.0.Total.TotalGas/TotalWater`
+- Gas/Wasser: `statistics.0.temp.sumDelta.sonoff.0.GasMeter.SENSOR.COUNTER.C1/C2.day`, `0_userdata.0.Total.TotalGas/TotalWater` — „Wasser heute" zeigt den Rohwert (bereits in Liter) ganzzahlig mit Einheit „L“, nicht in m³.
 - Solarthermie: `ebus.1.sc.messages.Coll1Sensor/Storage1Sensor3/Storage2Sensor3.fields.temp.value`
 - Raumklima: siehe Hinweis oben (gemischte Sensoren je Raum)
 - Lüftung-Schnellzugriff: `sonoff.0.Lueftung.POWER`, `0_userdata.0.Recovair.VentCmd/BoostCmd`
 - USV: `nut.0.info.connection`, `nut.0.battery.charge`
 - Beschattung: `0_userdata.0.ShutterControl.SunProtect`
 
-**Heizung** – `km200.0.heatingCircuits.hc1.*`, `km200.0.system.*`,
-`ebus.1.mc.*` (Mischer), `ebus.1.bai.*` (Kessel), `ebus.1.sc.Storage*`
-(Solarspeicher), `0_userdata.0.Total.TotalGas*`, Grafana
-`vaillant-heizung`.
+**Heizung** – `ebus.1.mc.*` (Mischer-Vorlauf), `ebus.1.bai.*`
+(Kessel-Vorlauf), `ebus.1.sc.Storage*` (Solarspeicher),
+`0_userdata.0.Total.TotalGas*`, Grafana `vaillant-heizung`. Die
+`km200.0.heatingCircuits.hc1.*`/`km200.0.system.*`-Karte
+(„Wärmeerzeuger“) sowie Wasserdruck/Abgastemperatur wurden auf Wunsch
+entfernt; Gaszähler-Werte werden jetzt ohne Nachkommastellen angezeigt.
 
 **Photovoltaik** – Energiefluss-iframe, Grafana `photovoltaik`,
 `sonnen.0.status.acFrequency/acVoltage`, `sonnen.0.latestData.*`,
@@ -79,18 +81,29 @@ Preisoptimierung“** — übernommen aus deinem alten `viewEnergy`-Widget
 `.ladefensterHtml`, `.ladeHistorieHtml`, `.entscheidungsLogHtml` (werden
 1:1 als HTML aus ioBroker übernommen, siehe `data-oid-html` in `app.js`).
 
-**Lüftung (`#lueftung`)** – `ebus.0.recov.messages.*` (4 Luftströme,
-Feuchte, Volumenstrom, Bypass), `sonoff.0.Lueftung.SENSOR.ENERGY.*`,
-Steuerung über `0_userdata.0.Recovair.*`, Klima über
-`openweathermap.0.forecast.current.temperature`,
-`mqtt.0.ESP09.Keller.Temperature`, `0_userdata.0.absFeuchte.*`.
+**Lüftung (`#lueftung`)** – `ebus.0.recov.messages.*` (4 Luftströme im
+neuen Luftstrom-Diagramm: Frischluft/Fortluft links, Zuluft/Abluft
+rechts, Wärmetauscher-Icon in der Mitte nur dekorativ), Feuchte,
+Volumenstrom, `sonoff.0.Lueftung.SENSOR.ENERGY.*`, Steuerung über
+`0_userdata.0.Recovair.*`. Die alte „Klima“-Karte mit
+`mqtt.0.ESP09.Keller.Temperature` wurde entfernt (Datenpunkt existiert
+laut dir nicht mehr).
 
-**Solaranlage** – `ebus.1.sc.messages.*` (Kollektor/Speicher/Pumpe),
-Regelparameter `0_userdata.0.Solaranlage.*`, Grafana `vaillant-solaranlage`.
+**Solaranlage** – neues Fließbild Kollektor → Pumpe → Speicher oben/unten
+(gleiches Muster wie der Energiefluss auf der Übersicht) plus
+`ebus.1.sc.messages.*`, Regelparameter `0_userdata.0.Solaranlage.*`,
+Grafana `vaillant-solaranlage`.
 
 **Temperatur** – 4× `shelly.1.shellyhtg3#...` (Temp/Feuchte/Batterie/
-Min-Max/Last-Change), `openweathermap.0`, `0_userdata.0.absFeuchte.*`,
-2 Grafana-Panels (`raumtemperatur`, `humidity`).
+Min-Max/Last-Change), `openweathermap.0`, 2 Grafana-Panels
+(`raumtemperatur`, `humidity`). Die Karte „Außen/Innen · abs. Feuchte“
+(`0_userdata.0.absFeuchte.*`) wurde auf Wunsch entfernt.
+
+**Grafana-Einbettung (Heizung/PV/Solaranlage/Temperatur)** – alle
+Grafana-iframes laufen jetzt über `grafanaFrame()` in `app.js`: feste
+Basic-Auth-Zugangsdaten (`admin`/`Batman1!`) direkt in der URL plus
+`&kiosk`, damit kein Login-Prompt und kein Grafana-Menü mehr angezeigt
+wird — siehe Sicherheitshinweis dazu in `html-dashboard/app/README.md`.
 
 **Statistik** – `statistics.0.temp.sumDelta.*` je Zeitraum (siehe Hinweis
 oben), Gesamt-Zähler `fronius.0.inverter.1.TOTAL_ENERGY` /
