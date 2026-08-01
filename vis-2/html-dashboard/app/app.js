@@ -55,6 +55,20 @@ function card(title, accent, inner, accent2){
   return `<div class="card" style="--accent:${accent};--accent2:${accent2||accent}"><h2>${title}</h2>${inner}</div>`;
 }
 function switchRow(label, oid){ return `<div class="switch-row"><span class="l">${label}</span><button class="sw" data-oid="${oid}"></button></div>`; }
+// read-only text/enum pill, e.g. "Betriebsart: Heizen"
+function statusBadge(oid, opts={}){
+  const { digits=0, unit='' } = opts;
+  return `<span class="badge" data-oid="${oid}" data-digits="${digits}" data-unit="${unit}">–</span>`;
+}
+// boolean-driven pill with its own on/off label + color (not a toggle — read-only status)
+function boolBadge(oid, onLabel, offLabel){
+  return `<span class="badge badge-bool" data-oid="${oid}" data-on="${onLabel||'Aktiv'}" data-off="${offLabel||'Inaktiv'}">–</span>`;
+}
+function boolBadgeRow(label, oid, onLabel, offLabel){ return `<div class="switch-row"><span class="l">${label}</span>${boolBadge(oid,onLabel,offLabel)}</div>`; }
+// pre-rendered HTML fragment straight from an ioBroker state (e.g. an old vis widget's html-blob state)
+function htmlBlob(oid, label){
+  return `<div class="blob-card"><div class="t-label">${label}</div><div class="blob-content" data-oid-html="${oid}"></div></div>`;
+}
 function sliderRow(label, oid, min=0, max=100){
   return `<div class="slider-row"><div class="l"><span>${label}</span><span data-oid="${oid}" data-digits="0" data-unit="%">–</span></div>
     <input type="range" min="${min}" max="${max}" step="1" data-slider-oid="${oid}"></div>`;
@@ -82,6 +96,23 @@ function ringGauge(oid, opts={}){
 // ==================================================================
 // BENTO TILES (Home)
 // ==================================================================
+// generic hub-and-spoke flow diagram: up to 4 nodes (top / bottom-left / bottom-right / center)
+// connected by animated dashed lines — reused for power flow, air flow, etc.
+function flowDiagram(nodes, lines, opts={}){
+  const overlays = nodes.map(n=>`
+    <div style="position:absolute;left:${n.x}%;top:${n.y}%;transform:translate(-50%,-50%);text-align:center;width:74px;">
+      <div style="width:38px;height:38px;border-radius:50%;background:${n.bg};display:flex;align-items:center;justify-content:center;margin:0 auto 4px;box-shadow:0 4px 14px rgba(0,0,0,.45);color:#fff;">${icon(n.kind,19)}</div>
+      <div class="flow-label">${n.label}</div>
+      <div class="flow-value" data-oid="${n.oid}" data-digits="${n.digits??0}" data-unit="${n.unit}">–</div>
+    </div>`).join('');
+  return `<div class="t span2 glass flow-tile">
+    <div class="t-label">${opts.title||'Energiefluss · jetzt'}</div>
+    <div class="flow-wrap">
+      <svg class="flow-svg" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg>
+      ${overlays}
+    </div>
+  </div>`;
+}
 function flowHero(){
   const nodes = [
     { x:50, y:11, bg:'linear-gradient(135deg,#ffb020,#ff7a45)', label:'Sonne', kind:'sun', oid:'sonnen.0.status.production', unit:'W' },
@@ -93,19 +124,22 @@ function flowHero(){
     <path class="flow-line" style="stroke:#ffb020" d="M50,14 L50,53"/>
     <path class="flow-line" style="stroke:#34d399;animation-delay:.25s" d="M16,73 L45,58"/>
     <path class="flow-line" style="stroke:#60a5fa;animation-delay:.5s" d="M84,73 L55,58"/>`;
-  const overlays = nodes.map(n=>`
-    <div style="position:absolute;left:${n.x}%;top:${n.y}%;transform:translate(-50%,-50%);text-align:center;width:74px;">
-      <div style="width:38px;height:38px;border-radius:50%;background:${n.bg};display:flex;align-items:center;justify-content:center;margin:0 auto 4px;box-shadow:0 4px 14px rgba(0,0,0,.45);color:#fff;">${icon(n.kind,19)}</div>
-      <div class="flow-label">${n.label}</div>
-      <div class="flow-value" data-oid="${n.oid}" data-digits="0" data-unit="${n.unit}">–</div>
-    </div>`).join('');
-  return `<div class="t span2 glass flow-tile">
-    <div class="t-label">Energiefluss · jetzt</div>
-    <div class="flow-wrap">
-      <svg class="flow-svg" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg>
-      ${overlays}
-    </div>
-  </div>`;
+  return flowDiagram(nodes, lines, {title:'Energiefluss · jetzt'});
+}
+// airflow diagram for Lüftung: Frischluft (outside) + Abluft (extract) through the
+// heat-exchanger, out as Zuluft (supply) / Fortluft (exhaust)
+function airFlowDiagram(){
+  const nodes = [
+    { x:50, y:11, bg:'linear-gradient(135deg,#60a5fa,#3b82f6)', label:'Frischluft', kind:'wind', oid:'ebus.0.recov.messages.TempOutsideAir.fields.temp.value', unit:'°', digits:1 },
+    { x:13, y:76, bg:'linear-gradient(135deg,#34d399,#10b981)', label:'Zuluft', kind:'home', oid:'ebus.0.recov.messages.TempInletAir.fields.temp.value', unit:'°', digits:1 },
+    { x:87, y:76, bg:'linear-gradient(135deg,#fb7185,#f43f5e)', label:'Fortluft', kind:'wind', oid:'ebus.0.recov.messages.TempOutgoingAir.fields.temp.value', unit:'°', digits:1 },
+    { x:50, y:56, bg:'linear-gradient(135deg,#7c6cff,#4fd1ff)', label:'Abluft', kind:'grid', oid:'ebus.0.recov.messages.TempWasteAir.fields.temp.value', unit:'°', digits:1 },
+  ];
+  const lines = `
+    <path class="flow-line" style="stroke:#60a5fa" d="M50,14 L50,53"/>
+    <path class="flow-line" style="stroke:#34d399;animation-delay:.25s" d="M45,58 L16,73"/>
+    <path class="flow-line" style="stroke:#fb7185;animation-delay:.5s" d="M55,58 L84,73"/>`;
+  return `<div class="bento" style="margin-bottom:12px">${flowDiagram(nodes, lines, {title:'Luftströme · jetzt'})}</div>`;
 }
 function battTile(){
   return `<div class="t glass batt-tile">
@@ -173,6 +207,25 @@ function leaderboard(items){
     </div>`).join('')}</div>`;
 }
 
+// ==================================================================
+// BATTERIELADEN (Preisoptimierung) — carried over from the old vis widget
+// ==================================================================
+function batterieladenCard(){
+  return card('Batterieladen · Preisoptimierung','var(--green)',
+    boolBadgeRow('Status', '0_userdata.0.SonnenLaden.ladeAktiv', 'Lädt', 'Pausiert') +
+    subLine('Statustext','0_userdata.0.SonnenLaden.statusText',{digits:0,unit:''}) +
+    row(3,[
+      tile('0_userdata.0.SonnenLaden.aktuellerPreis','Preis',{digits:2,unit:'ct'}),
+      tile('0_userdata.0.SonnenLaden.spreadAktuell','Spread',{digits:2,unit:'ct'}),
+      tile('sonnen.0.status.userSoc','Speicher',{digits:0,unit:'%'}),
+    ]) +
+    subLine('Nächstes Fenster','0_userdata.0.SonnenLaden.naechstesFenster',{digits:0,unit:''}) +
+    subLine('Begründung','0_userdata.0.SonnenLaden.statusBegruendung',{digits:0,unit:'',color:'var(--sub)'}) +
+    htmlBlob('0_userdata.0.SonnenLaden.ladefensterHtml','Ladefenster') +
+    htmlBlob('0_userdata.0.SonnenLaden.ladeHistorieHtml','Lade-Historie') +
+    htmlBlob('0_userdata.0.SonnenLaden.entscheidungsLogHtml','Entscheidungs-Log'));
+}
+
 // ---------------- shared data ----------------
 const OUTSIDE = 'ebus.1.broadcast.messages.outsidetemp.fields.temp2.value';
 const ROOMS = [
@@ -222,22 +275,25 @@ const PAGES = {
 
   heizung(){
     return header('flame','Heizung',OUTSIDE) +
-      card('Heizkreis 1 (Mischer)','#f97316', row(2,[
-        tile('ebus.1.mc.messages.FlowTemp.fields.temp.value','Vorlauf Ist',{digits:1,unit:'°'}),
-        tile('ebus.1.mc.messages.FlowTempDesired.fields.temp1.value','Vorlauf Soll',{digits:1,unit:'°',color:'var(--sub)'}),
-      ]) + subLine('Status','ebus.1.mc.messages.Status.fields.3.value',{digits:0,unit:''})) +
-      card('Kessel','#f97316', row(3,[
-        tile('ebus.1.bai.messages.FlowTemp.fields.temp.value','Vorlauf Ist',{digits:1,unit:'°'}),
-        tile('ebus.1.bai.messages.FlowTempDesired.fields.temp.value','Vorlauf Soll',{digits:1,unit:'°',color:'var(--sub)'}),
-        tile('ebus.1.bai.messages.WaterPressure.fields.press.value','Wasserdruck',{digits:2,unit:'bar',color:'var(--blue)'}),
-      ])) +
+      `<div class="bento" style="margin-bottom:12px">
+        <div class="t glass" style="display:flex;flex-direction:column;align-items:center;">
+          <div class="t-label" style="align-self:flex-start;">Kessel Vorlauf</div>
+          ${ringGauge('ebus.1.bai.messages.FlowTemp.fields.temp.value',{size:104,min:20,max:80,unit:'°',color:'var(--sun2)',strokeWidth:9,textSize:22})}
+          <div class="batt-sub">Soll ${val('ebus.1.bai.messages.FlowTempDesired.fields.temp.value',{digits:1,unit:'°'})}</div>
+        </div>
+        <div class="t glass" style="display:flex;flex-direction:column;align-items:center;">
+          <div class="t-label" style="align-self:flex-start;">Mischer Vorlauf</div>
+          ${ringGauge('ebus.1.mc.messages.FlowTemp.fields.temp.value',{size:104,min:20,max:60,unit:'°',color:'var(--blue)',strokeWidth:9,textSize:22})}
+          <div class="batt-sub">Soll ${val('ebus.1.mc.messages.FlowTempDesired.fields.temp1.value',{digits:1,unit:'°'})}</div>
+        </div>
+        ${miniStatTile('Wasserdruck','ebus.1.bai.messages.WaterPressure.fields.press.value','bar',2,'drop','linear-gradient(135deg,#60a5fa,#3b82f6)')}
+        ${miniStatTile('Abgastemp.','km200.0.system.sensors.temperatures.chimney','°',1,'flame','linear-gradient(135deg,#fbbf24,#f59e0b)')}
+      </div>` +
       card('Wärmeerzeuger (KM200)','#f97316',
-        subLine('Betriebsart','km200.0.heatingCircuits.hc1.operationMode',{digits:0,unit:''}) +
-        subLine('Status','km200.0.heatingCircuits.hc1.status',{digits:0,unit:''}) +
-        row(2,[
-          tile('km200.0.system.heatSources.hs1.actualPower','Leistung',{digits:0,unit:'W'}),
-          tile('km200.0.system.sensors.temperatures.chimney','Abgastemp.',{digits:1,unit:'°',color:'var(--amber)'}),
-        ])) +
+        `<div class="switch-row"><span class="l">Betriebsart</span>${statusBadge('km200.0.heatingCircuits.hc1.operationMode')}</div>` +
+        `<div class="switch-row"><span class="l">Status</span>${statusBadge('km200.0.heatingCircuits.hc1.status')}</div>` +
+        `<div class="switch-row"><span class="l">Mischer-Status</span>${statusBadge('ebus.1.mc.messages.Status.fields.3.value')}</div>` +
+        subLine('Leistung','km200.0.system.heatSources.hs1.actualPower',{digits:0,unit:'W'})) +
       card('Solarspeicher (Warmwasser)','var(--amber)', row(2,[
         tile('ebus.1.sc.messages.Storage1Sensor3.fields.temp.value','Oben',{digits:1,unit:'°'}),
         tile('ebus.1.sc.messages.Storage2Sensor3.fields.temp.value','Unten',{digits:1,unit:'°'}),
@@ -258,42 +314,45 @@ const PAGES = {
   pv(){
     return header('bolt','Photovoltaik',OUTSIDE) +
       iframeBlock('http://192.168.178.133:8082/energiefluss/index.html?instance=0', 260) +
-      iframeBlock('http://192.168.178.133:3000/d/nmigVjjWz/photovoltaik?orgId=1&refresh=10s', 280) +
+      batterieladenCard() +
       card('Sonnen Wechselrichter','#eab308', row(2,[
         tile('sonnen.0.status.acFrequency','Frequenz',{digits:2,unit:'Hz'}),
         tile('sonnen.0.status.acVoltage','Spannung',{digits:1,unit:'V',color:'var(--sub)'}),
       ]) +
         subLine('Vollladung seit','sonnen.0.latestData.secondsSinceFullCharge',{digits:0,unit:'s'}) +
         subLine('Software','sonnen.0.configurations.DE_Software',{digits:0,unit:'',color:'var(--sub)'})) +
-      card('Relais-Steuerung','#eab308',
-        switchRow('Verbindung','sonnen.0.info.connection') +
-        switchRow('Verbrauch Relay','sonnen.0.ios.DO_12') +
-        switchRow('Reduktion 1 Relay','sonnen.0.ios.DO_13') +
-        switchRow('Reduktion 2 Relay','sonnen.0.ios.DO_14'));
+      `<div class="glass" style="padding:16px;margin-bottom:14px;">
+        <div class="t-label">Relais-Steuerung</div>
+        <div class="chiprow">
+          ${actionChip('Verbindung','sonnen.0.info.connection')}
+          ${actionChip('Verbrauch Relay','sonnen.0.ios.DO_12')}
+          ${actionChip('Reduktion 1','sonnen.0.ios.DO_13')}
+          ${actionChip('Reduktion 2','sonnen.0.ios.DO_14')}
+        </div>
+      </div>` +
+      iframeBlock('http://192.168.178.133:3000/d/nmigVjjWz/photovoltaik?orgId=1&refresh=10s', 280);
   },
 
   lueftung(){
     return header('wind','Lüftung') +
-      card('Luftströme','#38bdf8', row(2,[
-        tile('ebus.0.recov.messages.TempOutsideAir.fields.temp.value','Frischluft',{digits:1,unit:'°',color:'var(--blue)'}),
-        tile('ebus.0.recov.messages.TempInletAir.fields.temp.value','Zuluft',{digits:1,unit:'°'}),
-      ]) + row(2,[
-        tile('ebus.0.recov.messages.TempWasteAir.fields.temp.value','Abluft',{digits:1,unit:'°'}),
-        tile('ebus.0.recov.messages.TempOutgoingAir.fields.temp.value','Fortluft',{digits:1,unit:'°',color:'var(--red)'}),
-      ])) +
+      airFlowDiagram() +
       card('Betrieb','#38bdf8', row(2,[
         tile('ebus.0.recov.messages.HumiWasteAir.fields.percent.value','Feuchte (Abluft)',{digits:1,unit:'%'}),
         tile('ebus.0.recov.messages.FlowActual.fields.0.value','Volumenstrom',{digits:0,unit:'m³/h',color:'var(--sub)'}),
       ]) +
         subLine('Verbrauch','sonoff.0.Lueftung.SENSOR.ENERGY.Power',{digits:0,unit:'W'}) +
         subLine('Gesamt','sonoff.0.Lueftung.SENSOR.ENERGY.Total',{digits:1,unit:'kWh',color:'var(--sub)'})) +
-      card('Steuerung','#38bdf8',
-        switchRow('Start / Betrieb','sonoff.0.Lueftung.POWER') +
-        switchRow('Lüften (30m)','0_userdata.0.Recovair.VentCmd') +
-        switchRow('Intensivlüften (15m)','0_userdata.0.Recovair.BoostCmd') +
-        switchRow('Automatischer Stop','0_userdata.0.Recovair.AutoStopCmd') +
-        switchRow('Nachlaufzeit aktiv','0_userdata.0.Recovair.DelayTime') +
-        sliderRow('Ziel Feuchtigkeit','0_userdata.0.Recovair.SetpointRecov',0,100)) +
+      `<div class="glass" style="padding:16px;margin-bottom:14px;">
+        <div class="t-label">Steuerung</div>
+        <div class="chiprow">
+          ${actionChip('Start / Betrieb','sonoff.0.Lueftung.POWER')}
+          ${actionChip('Lüften (30m)','0_userdata.0.Recovair.VentCmd')}
+          ${actionChip('Intensiv (15m)','0_userdata.0.Recovair.BoostCmd')}
+          ${actionChip('Auto-Stop','0_userdata.0.Recovair.AutoStopCmd')}
+        </div>
+        ${sliderRow('Ziel Feuchtigkeit','0_userdata.0.Recovair.SetpointRecov',0,100)}
+        ${sliderRow('Nachlaufzeit','0_userdata.0.Recovair.DelayTime',0,60)}
+      </div>` +
       card('Klima','var(--green)',
         subLine('Außen · Temp','openweathermap.0.forecast.current.temperature',{digits:1,unit:'°'}) +
         subLine('Außen · abs. Feuchte','0_userdata.0.absFeuchte.absFeuchteAussen',{digits:1,unit:'g/m³',color:'var(--blue)'}) +
@@ -303,24 +362,39 @@ const PAGES = {
 
   solar(){
     return header('sun','Solaranlage','ebus.1.sc.messages.Coll1Sensor.fields.temp.value') +
-      card('Kollektor','#fb923c', row(2,[
-        tile('ebus.1.sc.messages.Coll1Sensor.fields.temp.value','Temperatur',{digits:1,unit:'°',color:'var(--amber)'}),
-        tile('ebus.1.sc.messages.SolCollPumpED1.fields.percent0.value','Pumpe',{digits:0,unit:'%',color:'var(--blue)'}),
-      ])) +
-      card('Speicher','#fb923c', row(2,[
-        tile('ebus.1.sc.messages.Storage1Sensor3.fields.temp.value','Oben',{digits:1,unit:'°'}),
-        tile('ebus.1.sc.messages.Storage2Sensor3.fields.temp.value','Unten',{digits:1,unit:'°'}),
-      ])) +
-      card('Speicher laden erzwingen','#fb923c', switchRow('Aktiv','0_userdata.0.Solaranlage.CmdLoadStorage')) +
+      `<div class="bento" style="margin-bottom:12px">
+        <div class="t glass" style="display:flex;flex-direction:column;align-items:center;">
+          <div class="t-label" style="align-self:flex-start;">Kollektor</div>
+          ${ringGauge('ebus.1.sc.messages.Coll1Sensor.fields.temp.value',{size:104,min:10,max:90,unit:'°',color:'var(--amber)',strokeWidth:9,textSize:22})}
+        </div>
+        <div class="t glass" style="display:flex;flex-direction:column;align-items:center;">
+          <div class="t-label" style="align-self:flex-start;">Pumpe</div>
+          ${ringGauge('ebus.1.sc.messages.SolCollPumpED1.fields.percent0.value',{size:104,min:0,max:100,unit:'%',color:'var(--blue)',strokeWidth:9,textSize:22})}
+        </div>
+        ${miniStatTile('Speicher oben','ebus.1.sc.messages.Storage1Sensor3.fields.temp.value','°',1,'thermo','linear-gradient(135deg,#fb923c,#f97316)')}
+        ${miniStatTile('Speicher unten','ebus.1.sc.messages.Storage2Sensor3.fields.temp.value','°',1,'thermo','linear-gradient(135deg,#60a5fa,#3b82f6)')}
+      </div>` +
+      `<div class="glass" style="padding:16px;margin-bottom:14px;">
+        <div class="t-label">Steuerung</div>
+        <div class="chiprow">${actionChip('Speicher laden erzwingen','0_userdata.0.Solaranlage.CmdLoadStorage')}</div>
+      </div>` +
       card('Regelung','#fb923c',
-        subLine('Speicher Max (PWM off)','0_userdata.0.Solaranlage.TempHigh',{digits:1,unit:'°'}) +
-        subLine('Kolländerung / 1min','0_userdata.0.Solaranlage.DifferenceMax',{digits:1,unit:'°'}) +
-        subLine('Hysterese Speicher Max','0_userdata.0.Solaranlage.HystereseStorageMax',{digits:1,unit:'°'}) +
-        subLine('Mittelwert Kollektor (5m)','0_userdata.0.Solaranlage.MittelwertCollValue',{digits:1,unit:'°'}) +
-        subLine('Einschaltdifferenz','0_userdata.0.Solaranlage.DifferenzStart',{digits:1,unit:'°'}) +
-        subLine('Deadband','0_userdata.0.Solaranlage.Deadband',{digits:1,unit:'°'}) +
-        subLine('Hysterese-Rampe','0_userdata.0.Solaranlage.HystereseRampe',{digits:1,unit:'°'}) +
-        subLine('Hysterese','0_userdata.0.Solaranlage.Hysterese',{digits:1,unit:'°'})) +
+        row(2,[
+          tile('0_userdata.0.Solaranlage.TempHigh','Speicher Max',{digits:1,unit:'°'}),
+          tile('0_userdata.0.Solaranlage.DifferenceMax','Kolländ./1m',{digits:1,unit:'°'}),
+        ]) +
+        row(2,[
+          tile('0_userdata.0.Solaranlage.HystereseStorageMax','Hyst. Sp.-Max',{digits:1,unit:'°'}),
+          tile('0_userdata.0.Solaranlage.MittelwertCollValue','Ø Kollektor (5m)',{digits:1,unit:'°'}),
+        ]) +
+        row(2,[
+          tile('0_userdata.0.Solaranlage.DifferenzStart','Einschaltdiff.',{digits:1,unit:'°'}),
+          tile('0_userdata.0.Solaranlage.Deadband','Deadband',{digits:1,unit:'°'}),
+        ]) +
+        row(2,[
+          tile('0_userdata.0.Solaranlage.HystereseRampe','Hyst.-Rampe',{digits:1,unit:'°'}),
+          tile('0_userdata.0.Solaranlage.Hysterese','Hysterese',{digits:1,unit:'°'}),
+        ])) +
       iframeBlock('http://192.168.178.133:3000/d/CTus57WRk/vaillant-solaranlage?orgId=1&refresh=10s', 280);
   },
 
@@ -398,12 +472,14 @@ async function poll(){
   const rings = Array.from(active.querySelectorAll('[data-ring-oid]'));
   const bars = Array.from(active.querySelectorAll('[data-bar-oid]'));
   const lbs = Array.from(active.querySelectorAll('[data-lb-oid]'));
+  const htmlNodes = Array.from(active.querySelectorAll('[data-oid-html]'));
   const oids = [...new Set([
     ...nodes.map(n=>n.dataset.oid),
     ...sliders.map(n=>n.dataset.sliderOid),
     ...rings.map(n=>n.dataset.ringOid),
     ...bars.map(n=>n.dataset.barOid),
     ...lbs.map(n=>n.dataset.lbOid),
+    ...htmlNodes.map(n=>n.dataset.oidHtml),
   ])];
   if (!oids.length) return;
   const values = {};
@@ -415,7 +491,17 @@ async function poll(){
   nodes.forEach(n=>{
     const oid = n.dataset.oid;
     if (n.tagName === 'BUTTON'){ n.classList.toggle('on', values[oid] === 'true' || values[oid] === '1'); }
+    else if (n.classList.contains('badge-bool')){
+      const isOn = values[oid] === 'true' || values[oid] === '1';
+      n.classList.toggle('on', isOn);
+      n.textContent = isOn ? n.dataset.on : n.dataset.off;
+    }
     else { n.textContent = (n.dataset.prepend||'') + fmt(values[oid], Number(n.dataset.digits??1), n.dataset.unit||''); }
+  });
+
+  htmlNodes.forEach(n=>{
+    const raw = values[n.dataset.oidHtml];
+    n.innerHTML = (raw===null || raw===undefined || raw==='null') ? '' : raw;
   });
 
   rings.forEach(ringEl=>{

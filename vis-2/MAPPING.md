@@ -71,7 +71,13 @@ außer wo unten explizit als Annahme markiert.
 **Photovoltaik** – Energiefluss-iframe, Grafana `photovoltaik`,
 `sonnen.0.status.acFrequency/acVoltage`, `sonnen.0.latestData.*`,
 `sonnen.0.configurations.DE_Software`, `sonnen.0.ios.DO_12/13/14`,
-`sonnen.0.info.connection`.
+`sonnen.0.info.connection`, sowie die neue Karte **„Batterieladen ·
+Preisoptimierung“** — übernommen aus deinem alten `viewEnergy`-Widget
+(„SonnenLaden“): `0_userdata.0.SonnenLaden.ladeAktiv` (bool),
+`.statusText`, `.aktuellerPreis`, `.spreadAktuell`, `.naechstesFenster`,
+`.statusBegruendung` sowie die drei vorgerenderten HTML-Blob-States
+`.ladefensterHtml`, `.ladeHistorieHtml`, `.entscheidungsLogHtml` (werden
+1:1 als HTML aus ioBroker übernommen, siehe `data-oid-html` in `app.js`).
 
 **Lüftung (`#lueftung`)** – `ebus.0.recov.messages.*` (4 Luftströme,
 Feuchte, Volumenstrom, Bypass), `sonoff.0.Lueftung.SENSOR.ENERGY.*`,

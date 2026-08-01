@@ -69,8 +69,8 @@ body{
 .bento{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:6px;}
 .bento .t{ padding:16px; }
 .t.span2{grid-column:1 / -1;}
-.t.icon{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
-.t.icon svg{width:18px;height:18px;color:#fff;}
+.t-icon{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;flex-shrink:0;}
+.t-icon svg{width:18px;height:18px;color:#fff;}
 .t .t-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--sub);margin-bottom:6px;}
 .t .t-big{font-size:26px;font-weight:800;letter-spacing:-.5px;line-height:1.1;}
 .t .t-small{font-size:12px;color:var(--sub);margin-top:4px;}
@@ -135,6 +135,21 @@ body{
 .slider-row{padding:10px 0;}
 .slider-row .l{font-size:13px;display:flex;justify-content:space-between;margin-bottom:8px;}
 .slider-row input[type=range]{width:100%; accent-color:var(--accentA);}
+
+/* ---------- status pills ---------- */
+.badge{display:inline-flex;align-items:center;padding:4px 11px;border-radius:12px;
+  background:rgba(255,255,255,.08);font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;}
+.badge-bool{background:rgba(251,113,133,.15);color:var(--red);}
+.badge-bool.on{background:rgba(52,211,153,.16);color:var(--green);}
+
+/* ---------- raw HTML blob from an old vis widget (SonnenLaden etc.) ---------- */
+.blob-card{margin-top:12px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.035);
+  border:1px solid var(--glassBorder);}
+.blob-card .t-label{margin-bottom:8px;}
+.blob-content{font-size:12.5px;color:var(--sub);line-height:1.55;overflow-x:auto;}
+.blob-content table{width:100%;border-collapse:collapse;font-size:12px;}
+.blob-content td, .blob-content th{padding:4px 6px;border-bottom:1px solid var(--glassBorder);text-align:left;}
+.blob-content a{color:var(--blue);}
 
 /* ---------- ring gauge (generic small) ---------- */
 .ring{width:54px;height:54px;flex-shrink:0;}

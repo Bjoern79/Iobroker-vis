@@ -3,7 +3,7 @@
 // cache-first copy. Icons/manifest rarely change, so those stay cache-first
 // for fast/offline loading. Bumping CACHE below forces old caches to be
 // dropped in 'activate' — bump it again whenever this file changes.
-const CACHE = 'dashboard-shell-v3';
+const CACHE = 'dashboard-shell-v4';
 const STATIC_ASSETS = [
   './manifest.json',
   './icons/icon-180.png',
